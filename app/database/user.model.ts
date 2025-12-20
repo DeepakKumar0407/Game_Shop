@@ -21,14 +21,13 @@ const UserSchema = new Schema<UserType>({
         required:[true,"Phone is required"],
         validate:{
             validator:(v:string)=>v.length ===10,
-            message:"Number cant be longer than 10"
+            message:"Number munst be 10 digits"
         }
     },
     email:{
         type:String,
         required:true,
         lowercase:true,
-        unique:true,
         validate:{
             validator:(e)=>{
                 return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e);
@@ -69,7 +68,21 @@ UserSchema.methods.isValidPassword = async function (password:string){
         throw new Error('Password comparison failed');
     }
 }
-
+UserSchema.methods.isValidEmail = function(email:string){
+    try {
+        if(email.toLocaleLowerCase() === this.email){
+            return true
+        }
+        else{
+            return false
+        }
+    } catch (error) {
+        console.error(error)
+        return false
+    }
+}
+UserSchema.index({ email: 1 }, { unique: true })
+UserSchema.index({ phone: 1 }, { unique: true })
 const User:Model<UserType> = models.User || mongoose.model<UserType>('User',UserSchema)
 
 export default User
