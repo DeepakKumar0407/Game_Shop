@@ -8,15 +8,15 @@ export interface ReviewType {
 
 export interface GameType extends Document{
     title:string;
-    image:string;
-    slug:string;
+    image:string|null;
+    slug?:string;
     developer:string;
     producer:string;
     description:string;
-    reviews:string[];
-    releseDate:string;
+    reviews?:string[];
+    releaseDate:string;
     tags:string[];
-    price:number;
+    price:string;
     platform:string[];
 
 }
@@ -28,7 +28,6 @@ const GameSchema = new Schema<GameType>({
     },
     slug:{
         type:String,
-        required:true
     },
       image:{
         type:String,
@@ -54,12 +53,12 @@ const GameSchema = new Schema<GameType>({
         type:[String],
         required:true
     },
-      releseDate:{
+      releaseDate:{
         type:String,
         required:true
     },
       price:{
-        type:Number,
+        type:String,
         required:true
     },
       platform:{
@@ -68,6 +67,18 @@ const GameSchema = new Schema<GameType>({
     },
 },{timestamps:true})
 
+GameSchema.pre('save', function() {
+  const game = this as GameType;
+
+
+  if (game.isModified('title') || game.isNew) {
+    game.slug = generateSlug(game.title);
+  }
+
+  if (game.isModified('date')) {
+    game.releaseDate = normalizeDate(game.releaseDate);
+  }
+});
 function generateSlug(title: string): string {
   return title
     .toLowerCase()
@@ -86,20 +97,6 @@ function normalizeDate(dateString: string): string {
   }
   return date.toISOString().split('T')[0]; 
 }
-
-GameSchema.pre('save', function() {
-  const event = this as GameType;
-
-
-  if (event.isModified('title') || event.isNew) {
-    event.slug = generateSlug(event.title);
-  }
-
-  if (event.isModified('date')) {
-    event.releseDate = normalizeDate(event.releseDate);
-  }
-});
-
 GameSchema.index({ slug: 1 }, { unique: true })
 
 const Game:Model<GameType> = models.Game || mongoose.model<GameType>('Game',GameSchema)

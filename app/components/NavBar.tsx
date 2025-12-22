@@ -2,7 +2,7 @@ import Link from "next/link"
 
 const NavBar = () => {
   return (
-    <div className="flex justify-around">
+    <div className="flex justify-around bg-red-800">
         <div>
             <p>LOGO</p>
         </div>
