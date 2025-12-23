@@ -6,7 +6,8 @@ export async function POST(req:NextRequest){
    try {
     await ConnectDb()
     const {name,phone,email,password} = await req.json()
-    const user = User.create({name,phone,email,password})
+    const user = await User.create({name,phone,email,password})
+    console.log(user,"backend")
     return NextResponse.json({message:'User Created',user},{status:200})
    } catch (error) {
     console.error(error)

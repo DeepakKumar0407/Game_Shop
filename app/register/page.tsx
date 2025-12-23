@@ -1,9 +1,16 @@
+import { getServerSession } from "next-auth";
 import RegisterForm from "../components/RegisterForm";
+import { redirect } from "next/navigation";
 
 export default async function RegisterPage() {
-  return (
-      <div className="">
+ const session = await getServerSession()
+  if (!session) {
+   return(
+    <div className="">
         <RegisterForm />
-      </div>
-  );
+    </div>
+   )
+  } else {
+    redirect('/login')
+  }
 }

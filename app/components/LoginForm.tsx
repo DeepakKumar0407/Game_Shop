@@ -1,7 +1,8 @@
 "use client"
 import { ChangeEvent, FormEvent, useState } from "react"
-import { UserType } from "../database/user.model"
 import { signIn } from "next-auth/react";
+import { redirect } from "next/navigation";
+
 const LoginForm = () => {
     interface LoginUserType{
         email:string;
@@ -26,6 +27,9 @@ const LoginForm = () => {
         password:userData.password,
         redirect: false,
       });
+      if(res?.ok){
+        redirect('/')
+      }
     }
   return (
    <form onSubmit={handleSubmit}>

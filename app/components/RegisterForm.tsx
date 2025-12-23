@@ -1,6 +1,7 @@
 "use client"
 import { ChangeEvent, FormEvent, useState } from "react"
 import { UserType } from "../database/user.model"
+import { redirect } from "next/navigation"
 const RegisterForm = () => {
     const initialData:UserType = {
         email:"",
@@ -26,6 +27,10 @@ const RegisterForm = () => {
             body:JSON.stringify(userData)
 
         })
+        const {message} = await res.json()
+        if(message === 'User Created'){
+            redirect('/login')
+        }
     }
   return (
    <form onSubmit={handleSubmit}>

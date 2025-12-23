@@ -1,5 +1,18 @@
-const About = () => {
-  return (
+import { getServerSession } from "next-auth"
+import Link from "next/link"
+
+
+const About = async() => {
+  const session = await getServerSession()
+  if (!session) {
+   return(
+    <div>
+    <p>You must be logged in to see this page</p>
+    <Link href="/login">Login</Link>
+    </div>
+   )
+  } else {
+     return (
     <div>
          <h1 className="text-center mt-5 mb-5">About us</h1>
         <div className="flex justify-between w-7/8 mx-auto pb-15">
@@ -31,5 +44,7 @@ const About = () => {
           </div>
     </div>
   )
+  }
+ 
 }
 export default About
