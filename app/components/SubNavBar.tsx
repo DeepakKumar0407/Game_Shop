@@ -1,4 +1,5 @@
 import Link from "next/link"
+import SearchBar from "./SearchBar"
 
 const SubNavBar = () => {
   return (
@@ -6,7 +7,7 @@ const SubNavBar = () => {
         <div>
             <p>Tags</p>
         </div>
-        <div>SearchBar</div>
+        <div><SearchBar/></div>
         <div>
             <Link href={`http://localhost:3000/cart`}>Cart</Link>
             <Link href="/profile">Profile</Link>

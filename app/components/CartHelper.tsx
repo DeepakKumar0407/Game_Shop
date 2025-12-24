@@ -3,7 +3,7 @@ const CartHelper = ({prop}:{prop:string}) => {
     const slug = prop
     const handleClick=async()=>{
         const res = await fetch("http://localhost:3000/api/cart",{
-            method:"Post",
+            method:"POST",
             headers:{
                 'Content-Type': 'text/plain;charset=UTF-8'
             },

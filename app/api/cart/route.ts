@@ -55,3 +55,16 @@ export async function GET(req:NextRequest){
    }
 
 }
+
+export async function DELETE(req:NextRequest){
+ try {
+    await ConnectDb()
+    const gameToDelete = await req.text()
+    console.log(gameToDelete)
+    const res = await Cart.findOneAndDelete({slug:gameToDelete})
+    return NextResponse.json({message:'success'},{status:200})
+ } catch (error) {
+    console.error(error)
+    return NextResponse.json({message:"error",error},{status:400})
+ }
+}

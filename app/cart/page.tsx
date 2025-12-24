@@ -2,6 +2,7 @@ import Link from "next/link"
 import GameCard from "../components/GameCard"
 import { GameType } from "../database/game.model"
 import { getServerSession } from "next-auth"
+import CartButton from "../components/CartButton"
 
 const Cart = async() => {
   const res = await fetch('http://localhost:3000/api/cart')
@@ -21,6 +22,7 @@ const Cart = async() => {
         <div className="w-2/7" key={game.slug} >
         <GameCard prop={game}/>
         <p>Total: {game.count}</p>
+        <CartButton prop={game.slug}/>
         </div>
       ))}
     </div>
