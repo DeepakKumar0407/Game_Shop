@@ -1,11 +1,12 @@
 import Link from "next/link"
 import SearchBar from "./SearchBar"
+import Tags from "./Tags"
 
 const SubNavBar = () => {
   return (
     <div className="flex justify-around bg-yellow-400">
-        <div>
-            <p>Tags</p>
+        <div className="flex justify-baseline gap-2 flex-col">
+            <Tags/>
         </div>
         <div><SearchBar/></div>
         <div>

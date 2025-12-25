@@ -21,8 +21,7 @@ const Cart = async() => {
       {games.map((game:GameType & {count:number})=>(
         <div className="w-2/7" key={game.slug} >
         <GameCard prop={game}/>
-        <p>Total: {game.count}</p>
-        <CartButton prop={game.slug}/>
+        <CartButton prop={game}/>
         </div>
       ))}
     </div>

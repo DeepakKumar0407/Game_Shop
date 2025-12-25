@@ -38,14 +38,14 @@ const Create = () => {
       [name]:name==="tags"||name==="platform"?value.split(','):value,
     }))
   }
-  const handleSubmit = (e:React.FormEvent<HTMLFormElement>)=>{
+  const handleSubmit = async (e:React.FormEvent<HTMLFormElement>)=>{
     e.preventDefault()
     const data = new FormData
     Object.entries(gameData).forEach(([key,value])=>{
       data.append(key,value)
     })
     try {
-      const res = fetch("http://localhost:3000/api/Games",{
+      const res = await fetch("http://localhost:3000/api/Games",{
         method:"POST",
         body:data
       })

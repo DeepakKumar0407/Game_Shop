@@ -1,4 +1,5 @@
 import Link from "next/link"
+import AddressHelper from "./addressHelper"
 
 const NavBar = () => {
   return (
@@ -6,6 +7,7 @@ const NavBar = () => {
         <div>
             <p>LOGO</p>
         </div>
+        <AddressHelper/>
         <div className="flex justify-around gap-3">
             <Link href="/">Home</Link>
             <Link href="/games">Games</Link>

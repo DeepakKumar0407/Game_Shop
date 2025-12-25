@@ -29,6 +29,7 @@ export async function POST(req:NextRequest){
     return NextResponse.json({message:"something went wrong",error},{status:500})
    }
 }
+
 export async function GET(req:NextRequest){
    try {
      await ConnectDb()
@@ -45,6 +46,11 @@ export async function GET(req:NextRequest){
       newRoot: {
         $mergeObjects: ["$doc", { count: "$count" }]
       }
+    }
+  },
+  {
+    $sort:{
+      slug:1
     }
   }
 ]);

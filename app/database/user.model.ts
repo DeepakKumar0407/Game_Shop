@@ -1,12 +1,21 @@
 import mongoose, { Schema,Model,models } from "mongoose";
 import bcrypt from 'bcrypt'
 
+export interface UserAddress{
+    flat:string;
+    street:string;
+    area:string;
+    city:string,
+    state:string,
+    country:string,
+    pincode:string,
+}
 export interface UserType{
     name:string;
     phone:string;
     email:string;
     password:string;
-    address?:string;
+    address?:UserAddress[];
 }
 export const isValidPassword = ()=>{
     console.log(true)
@@ -45,9 +54,37 @@ const UserSchema = new Schema<UserType>({
             message:"Invalid Password"
         }
     },
-    address:{
-        type:String,
-    }
+    address:[{
+            flat:{
+                type:String,
+                required:true
+            },
+             street:{
+                type:String,
+                required:true
+            },
+             area:{
+                type:String,
+                required:true
+            },
+             city:{
+                type:String,
+                required:true
+            },
+             state:{
+                type:String,
+                required:true
+            },
+             country:{
+                type:String,
+                required:true
+            },
+             pincode:{
+                type:String,
+                required:true
+            },
+
+        }]
 },{timestamps:true})
 
 UserSchema.pre('save',async function(){
