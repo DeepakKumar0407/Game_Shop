@@ -1,10 +1,10 @@
 import User from "@/app/database/user.model";
 import ConnectDb from "@/lib/mongodb";
-import NextAuth from "next-auth";
+import NextAuth, { AuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials"
 import bcrypt from 'bcrypt'
 
-const handler = NextAuth({
+export const authOptions:AuthOptions = {
     session: {
     strategy: "jwt",
   },
@@ -33,12 +33,12 @@ const handler = NextAuth({
             name: user.name
           };
         }
-        console.log("credentials", credentials);
         return null;
       },
     }),
   ],
 
-})
+}
 
+const handler = NextAuth(authOptions)
 export {handler as GET,handler as POST}

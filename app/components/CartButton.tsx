@@ -12,9 +12,9 @@ const CartButton = ({prop}:{prop:GameType & {count:number}}) => {
       body:slug
     })
     setCount(count=>count-1)
-     if(count<=0){
+    if(count<=0){
     setCount(0)
-  }
+    }
     game.count = count
   }
    const addGame = async (slug:string|undefined)=>{

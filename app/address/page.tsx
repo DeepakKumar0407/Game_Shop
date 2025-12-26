@@ -35,7 +35,7 @@ const AddressForm = () => {
       console.error(error)
     }
   }
-    const {data:session} = useSession()
+  const {data:session} = useSession()
   if (!session) {
    return(
     <div>

@@ -1,12 +1,12 @@
 import { NextRequest,NextResponse } from "next/server";
 import ConnectDb from "@/lib/mongodb";
-import Game from "@/app/database/game.model";
+import Game, { GameTypeWithoutDoc } from "@/app/database/game.model";
 
 export async function GET(req:NextRequest,{params}:{params:Promise<{slug:string}>}){
    try {
      await ConnectDb()
      const {slug} = await params
-     const game = await Game.findOne({slug:slug})
+     const game:GameTypeWithoutDoc|null = await Game.findOne({slug:slug})
      return NextResponse.json({message:"success",game},{status:200})
    } catch (error) {
     console.error(error)

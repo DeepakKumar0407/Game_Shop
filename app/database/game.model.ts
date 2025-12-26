@@ -6,6 +6,21 @@ export interface ReviewType {
     rating:number;
 }
 
+export interface GameTypeWithoutDoc{
+    title:string;
+    image:string|null;
+    slug?:string;
+    developer:string;
+    producer:string;
+    description:string;
+    reviews?:string[];
+    releaseDate:string;
+    tags:string[];
+    price:string;
+    platform:string[];
+
+}
+
 export interface GameType extends Document{
     title:string;
     image:string|null;

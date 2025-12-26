@@ -1,14 +1,14 @@
 import Image from "next/image";
-import { GameType } from "../database/game.model";
+import { GameType, GameTypeWithoutDoc } from "../database/game.model";
 import Link from "next/link";
 
-const GameCard = ({prop}:{prop:any}) => {
+const GameCard = ({prop}:{prop:GameTypeWithoutDoc}) => {
     const game = prop
 
   return (
     <div className="w-full">
         <Link href={`http://localhost:3000/games/${game.slug}`}>
-        <Image src={game.image} alt="image" width={200} height={100} className="w-full h-60"/>
+        <Image src={game.image!} alt="image" width={200} height={100} className="w-full h-60"/>
        
         <div className="flex justify-end ">
            <p>Price: ₹{game.price}</p>

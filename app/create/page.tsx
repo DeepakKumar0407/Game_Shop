@@ -18,7 +18,6 @@ const Create = () => {
 
   }
   const initialData:GameStructureType = {
-
     title:"",
     image:null,
     developer:"",

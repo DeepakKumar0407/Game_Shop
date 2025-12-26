@@ -1,16 +1,16 @@
 import { NextRequest,NextResponse } from "next/server";
 import ConnectDb from "@/lib/mongodb";
 import Cart from "@/app/database/cart.model";
-import Game from "@/app/database/game.model";
+import Game, { GameType, GameTypeWithoutDoc } from "@/app/database/game.model";
+import { WithUndefined } from "@/lib/types";
 
 
 export async function POST(req:NextRequest){
    try {
     await ConnectDb()
     const slug = await req.text()
-    console.log(slug,"here")
     const game = await Game.findOne({slug:slug})
-    const newCartObject = {
+    const newCartObject:WithUndefined<GameTypeWithoutDoc> = {
         title:game?.title,
         image:game?.image,
         slug:game?.slug,
@@ -22,7 +22,7 @@ export async function POST(req:NextRequest){
         price:game?.price,
         platform:game?.platform,
     }
-    const cartGame = Cart.create(newCartObject)
+    const cartGame:GameTypeWithoutDoc|null = await Cart.create(newCartObject)
     return NextResponse.json({message:'success'},{status:200})
    } catch (error) {
     console.error(error)
@@ -66,8 +66,7 @@ export async function DELETE(req:NextRequest){
  try {
     await ConnectDb()
     const gameToDelete = await req.text()
-    console.log(gameToDelete)
-    const res = await Cart.findOneAndDelete({slug:gameToDelete})
+    const res:GameTypeWithoutDoc|null = await Cart.findOneAndDelete({slug:gameToDelete})
     return NextResponse.json({message:'success'},{status:200})
  } catch (error) {
     console.error(error)

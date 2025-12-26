@@ -1,12 +1,22 @@
+"use client"
 import Link from "next/link"
+import { useState } from "react"
 
-const Tags = async () => {
-    const res = await fetch("http://localhost:3000/api/tags")
-    const {tags} = await res.json()
+const Tags = ({props}:{props:any}) => {
+  const tags = props
+  const [flag,setFlag] = useState(true)
+  const handleDropDown = ()=>{
+   if(flag){
+    setFlag(false)
+   }else{
+    setFlag(true)
+   }
+  }
   return (
-    <div className="">
+    <div className="absolute">
+      <p className="" onClick={handleDropDown}>Tags</p>
         {tags[0].allTags.map((tag:string)=>(
-            <div key={tag}>
+            <div key={tag} className={`${flag?'hidden':'visible'}`}>
             <Link href={`/search/${tag}`}>{tag[0].toUpperCase().concat(tag.slice(1))}</Link>
             </div>
         ))}

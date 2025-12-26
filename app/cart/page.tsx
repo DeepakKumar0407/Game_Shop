@@ -1,6 +1,6 @@
 import Link from "next/link"
 import GameCard from "../components/GameCard"
-import { GameType } from "../database/game.model"
+import { GameType, GameTypeWithoutDoc } from "../database/game.model"
 import { getServerSession } from "next-auth"
 import CartButton from "../components/CartButton"
 

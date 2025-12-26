@@ -60,9 +60,6 @@ export async function GET(req:NextRequest,{params}:{params:Promise<{slug:string}
                 }
               }
             }]},then:1}
-                    // { case: { $regexMatch: { input: "$title", regex: exact } }, then: 3 },
-                    // { case: firstTwo && { $regexMatch: { input: "$title", regex: firstTwo } }, then: 2 },
-                    // { case: { $regexMatch: { input: "$title", regex: first } }, then: 1 }
                 ],
                 default: 0
                 }}}

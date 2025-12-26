@@ -1,7 +1,8 @@
 import { NextRequest,NextResponse } from "next/server";
 import ConnectDb from "@/lib/mongodb";
 import cloudinary from "@/lib/cloudinary";
-import Game from "@/app/database/game.model";
+import Game, { GameTypeWithoutDoc } from "@/app/database/game.model";
+import { WithUndefined } from "@/lib/types";
 
 
 export async function POST(req:NextRequest){
@@ -19,7 +20,7 @@ export async function POST(req:NextRequest){
                 return resolve(result)
         }).end(buffer)
     })
-    const game = {
+    const game:WithUndefined<GameTypeWithoutDoc> = {
         title:data.get('title')?.toString(),
         description:data.get('description')?.toString(),
         developer:data.get("developer")?.toString(),
@@ -30,7 +31,7 @@ export async function POST(req:NextRequest){
         releaseDate:data.get('releaseDate')?.toString(),
         image:(uploadStream as {secure_url:string}).secure_url,
     }
-    const submittedGame = await Game.create(game)
+    const submittedGame:GameTypeWithoutDoc|null = await Game.create(game)
     return NextResponse.json({message:'success',submittedGame},{status:200})
    } catch (error) {
     console.error(error)
@@ -41,7 +42,7 @@ export async function POST(req:NextRequest){
 export async function GET(req:NextRequest){
    try {
      await ConnectDb()
-     const games = await Game.find().sort({createdAt:-1})
+     const games:GameTypeWithoutDoc[]|null = await Game.find().sort({createdAt:-1})
      return NextResponse.json({message:"success",games},{status:200})
    } catch (error) {
     console.error(error)

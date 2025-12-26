@@ -1,4 +1,4 @@
-import User from "@/app/database/user.model";
+import User, { UserType } from "@/app/database/user.model";
 import ConnectDb from "@/lib/mongodb";
 import { NextRequest,NextResponse } from "next/server";
 
@@ -6,8 +6,7 @@ export async function POST(req:NextRequest){
    try {
     await ConnectDb()
     const {name,phone,email,password} = await req.json()
-    const user = await User.create({name,phone,email,password})
-    console.log(user,"backend")
+    const user:UserType|null = await User.create({name,phone,email,password})
     return NextResponse.json({message:'User Created',user},{status:200})
    } catch (error) {
     console.error(error)
