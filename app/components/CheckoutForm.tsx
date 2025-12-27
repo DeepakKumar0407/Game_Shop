@@ -21,7 +21,6 @@ const CheckoutForm = ({prop}:{prop:any}) => {
     const [game,setGame] = useState(totalGames)
     const [time,setTime] = useState('8 AM to 12 PM')
     const [payment,setPayment] = useState('Cash')
-    console.log(games)
     games.map((game:GameType & {count:number})=>{
       const newGame = 
       { title:game.title,

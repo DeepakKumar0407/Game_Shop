@@ -2,9 +2,9 @@
 
 import { useState } from "react"
 import { GameType } from "../database/game.model"
+import { ReadonlyHeaders } from "next/dist/server/web/spec-extension/adapters/headers"
 
-const CartButton = ({prop}:{prop:GameType & {count:number}}) => {
-    const game = prop
+const CartButton = ({game,head}:{game:GameType & {count:number},head:ReadonlyHeaders}) => {
     const [count,setCount] = useState(game.count)
     const deleteGame = async (slug:string|undefined)=>{
     const res = await fetch("http://localhost:3000/api/cart",{
@@ -20,6 +20,7 @@ const CartButton = ({prop}:{prop:GameType & {count:number}}) => {
    const addGame = async (slug:string|undefined)=>{
     const res = await fetch("http://localhost:3000/api/cart",{
       method:"POST",
+      headers:Object.fromEntries(head.entries()),
       body:slug
     })
     setCount(count=>count+1)

@@ -6,9 +6,12 @@ import CheckoutForm from "../components/CheckoutForm"
 import { headers } from "next/headers"
 
 const Checkout = async() => {
-  const res = await fetch('http://localhost:3000/api/cart')
-  const {games} = await res.json()
   const head = await headers()
+  const res = await fetch('http://localhost:3000/api/cart',{
+    method:"GET",
+    headers:Object.fromEntries(head.entries()),
+  })
+  const {games} = await res.json()
   const userRes = await fetch('http://localhost:3000/api/user',{
       method:"GET",
       headers:Object.fromEntries(head.entries())

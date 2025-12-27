@@ -3,9 +3,14 @@ import GameCard from "../components/GameCard"
 import { GameType, GameTypeWithoutDoc } from "../database/game.model"
 import { getServerSession } from "next-auth"
 import CartButton from "../components/CartButton"
+import { headers } from "next/headers"
 
 const Cart = async() => {
-  const res = await fetch('http://localhost:3000/api/cart')
+  const head = await headers()
+  const res = await fetch('http://localhost:3000/api/cart',{
+    method:"GET",
+    headers:Object.fromEntries(head.entries()),
+  })
   const {games} = await res.json()
   const session = await getServerSession()
   if (!session) {
@@ -21,9 +26,10 @@ const Cart = async() => {
       {games.map((game:GameType & {count:number})=>(
         <div className="w-2/7" key={game.slug} >
         <GameCard prop={game}/>
-        <CartButton prop={game}/>
+        <CartButton game={game} head={head}/>
         </div>
       ))}
+      <Link href="/checkout">Buy</Link>
     </div>
   )
   }

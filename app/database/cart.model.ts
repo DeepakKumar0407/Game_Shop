@@ -1,7 +1,8 @@
 import mongoose, {Schema, Model,models,Document} from 'mongoose'
 
 
-export interface GameType extends Document{
+export interface CartType extends Document{
+    userEmail:string|null;
     title:string;
     image:string|null;
     slug?:string;
@@ -15,7 +16,26 @@ export interface GameType extends Document{
 
 }
 
-const CartSchema = new Schema<GameType>({
+export interface CartTypeWithoutDocs{
+    userEmail:string|null;
+    title:string;
+    image:string|null;
+    slug?:string;
+    developer:string;
+    producer:string;
+    description:string;
+    releaseDate:string;
+    tags:string[];
+    price:string;
+    platform:string[];
+
+}
+
+const CartSchema = new Schema<CartType>({
+    userEmail:{
+      type:String,
+      required:true
+    },
     title:{
         type:String,
         required:true
@@ -57,6 +77,6 @@ const CartSchema = new Schema<GameType>({
     },
 },{timestamps:true})
 
-const Cart:Model<GameType> = models.Cart || mongoose.model<GameType>('Cart',CartSchema)
+const Cart:Model<CartType> = models.Cart || mongoose.model<CartType>('Cart',CartSchema)
 
 export default Cart

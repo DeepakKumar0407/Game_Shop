@@ -1,16 +1,21 @@
 import { NextRequest,NextResponse } from "next/server";
 import ConnectDb from "@/lib/mongodb";
-import Cart from "@/app/database/cart.model";
 import Game, { GameType, GameTypeWithoutDoc } from "@/app/database/game.model";
 import { WithUndefined } from "@/lib/types";
+import { getServerSession } from "next-auth";
+import { authOptions } from "../auth/[...nextauth]/route";
+import Cart, { CartTypeWithoutDocs } from "@/app/database/cart.model";
+import { Session } from "inspector/promises";
 
 
 export async function POST(req:NextRequest){
    try {
     await ConnectDb()
+    const session = await getServerSession({req,...authOptions})
     const slug = await req.text()
     const game = await Game.findOne({slug:slug})
-    const newCartObject:WithUndefined<GameTypeWithoutDoc> = {
+    const newCartObject:WithUndefined<CartTypeWithoutDocs> = {
+        userEmail:session?.user?.email,
         title:game?.title,
         image:game?.image,
         slug:game?.slug,
@@ -22,7 +27,7 @@ export async function POST(req:NextRequest){
         price:game?.price,
         platform:game?.platform,
     }
-    const cartGame:GameTypeWithoutDoc|null = await Cart.create(newCartObject)
+    const cartGame:CartTypeWithoutDocs|null = await Cart.create(newCartObject)
     return NextResponse.json({message:'success'},{status:200})
    } catch (error) {
     console.error(error)
@@ -31,9 +36,15 @@ export async function POST(req:NextRequest){
 }
 
 export async function GET(req:NextRequest){
+  const session = await getServerSession({req,...authOptions})
    try {
      await ConnectDb()
      const games = await Cart.aggregate([
+      {
+        $match:{
+            userEmail:session?.user?.email
+        }
+      },
   {
     $group: {
       _id: "$slug",
@@ -66,7 +77,7 @@ export async function DELETE(req:NextRequest){
  try {
     await ConnectDb()
     const gameToDelete = await req.text()
-    const res:GameTypeWithoutDoc|null = await Cart.findOneAndDelete({slug:gameToDelete})
+    const res:CartTypeWithoutDocs|null = await Cart.findOneAndDelete({slug:gameToDelete})
     return NextResponse.json({message:'success'},{status:200})
  } catch (error) {
     console.error(error)

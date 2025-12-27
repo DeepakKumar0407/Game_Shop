@@ -1,11 +1,13 @@
 import CartHelper from "@/app/components/CartHelper"
 import { getServerSession } from "next-auth"
+import { headers } from "next/headers"
 import Image from "next/image"
 import Link from "next/link"
 
 const GameDetails = async ({params}:{params:Promise<{slug:string}>}) => {
   
   const {slug} = await params
+  const head = await headers()
   const res = await fetch(`http://localhost:3000/api/Games/${slug}`)
   const {game} = await res.json()
   const session = await getServerSession()
@@ -23,8 +25,7 @@ const GameDetails = async ({params}:{params:Promise<{slug:string}>}) => {
       <h1>{game.title}</h1>
       <Image src={game.image} alt="game image" width={1000} height={500}/>
       <p>{game.description}</p>
-      <CartHelper prop={game.slug}/>
-      <button>Buy Now</button>
+      <CartHelper prop={{slug:game.slug,head}}/>
       <div>
         <h1>Reviews</h1>
         <p>{game.reviews}</p>
