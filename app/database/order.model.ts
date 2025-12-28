@@ -85,7 +85,7 @@ const OrderSchema = new Schema<OrderType>({
         required:true
     },
 
-})
+},{timestamps:true})
 
 const Order:Model<OrderType> = models.Order || mongoose.model<OrderType>("Order",OrderSchema)
 
