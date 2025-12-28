@@ -13,7 +13,7 @@ const SearchBar = () => {
     <div>
         <form>
             <input type="text" name="search" value={search} placeholder="search" onChange={handleChange}required></input>
-            <Link href={`http://localhost:3000/search/${search}`}>S</Link>
+            <Link href={search===''?"":`http://localhost:3000/search/${search}`} >S</Link>
         </form>
     </div>
   )

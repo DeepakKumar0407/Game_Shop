@@ -5,6 +5,7 @@ import { useState } from "react";
 
 
 const Create = () => {
+  const {data:session} = useSession()
   interface GameStructureType{
     title:string;
     image:File|null;
@@ -29,6 +30,8 @@ const Create = () => {
     platform:[],
   }
   const [gameData,setGameData] = useState(initialData)
+  const[isLoading,setIsLoading] = useState(false)
+  const[submitted,setSubmitted] = useState(false)
 
   const handleChange = (e:React.ChangeEvent<HTMLInputElement|HTMLTextAreaElement>)=>{
     const {name,value} = e.target
@@ -39,6 +42,8 @@ const Create = () => {
   }
   const handleSubmit = async (e:React.FormEvent<HTMLFormElement>)=>{
     e.preventDefault()
+    setIsLoading(true)
+    setSubmitted(false)
     const data = new FormData
     Object.entries(gameData).forEach(([key,value])=>{
       data.append(key,value)
@@ -51,8 +56,9 @@ const Create = () => {
     } catch (error) {
       console.error(error)
     }
+    setIsLoading(false)
+    setSubmitted(true)
   }
-    const {data:session} = useSession()
   if (!session) {
    return(
     <div>
@@ -76,6 +82,7 @@ const Create = () => {
           <div className="label justify-center bg-green-800 rounded p-2 hover:bg-green-500">
             <button type="submit" className="cursor-pointer w-full h-full" onClick={() => window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' })}>Submit</button>
           </div>
+          <p>{isLoading&&'Loading...'}{submitted&& 'Game Submitted'}</p>
         </form>
     </div>
   )

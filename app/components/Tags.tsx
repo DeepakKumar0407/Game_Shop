@@ -17,7 +17,7 @@ const Tags = ({props}:{props:any}) => {
       <p className="" onClick={handleDropDown}>Tags</p>
         {tags[0].allTags.map((tag:string)=>(
             <div key={tag} className={`${flag?'hidden':'visible'}`}>
-            <Link href={`/search/${tag}`}>{tag[0].toUpperCase().concat(tag.slice(1))}</Link>
+            <Link href={`/search/${tag}`} onClick={handleDropDown}>{tag[0].toUpperCase().concat(tag.slice(1))}</Link>
             </div>
         ))}
     </div>
