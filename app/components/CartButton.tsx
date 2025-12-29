@@ -29,9 +29,9 @@ const CartButton = ({game,head}:{game:GameType & {count:number},head:ReadonlyHea
  
   return (
     <div>
-      <button onClick={()=>deleteGame(game.slug)}>D</button>
       <p>Total: {count}</p>
       <button onClick={()=>addGame(game.slug)}>A</button>
+      <button onClick={()=>deleteGame(game.slug)}>D</button>
     </div>
   )
 }

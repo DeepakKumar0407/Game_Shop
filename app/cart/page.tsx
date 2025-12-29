@@ -4,6 +4,8 @@ import { GameType, GameTypeWithoutDoc } from "../database/game.model"
 import { getServerSession } from "next-auth"
 import CartButton from "../components/CartButton"
 import { headers } from "next/headers"
+import GameCardLong from "../components/GameCardLong"
+import { CartType } from "../database/cart.model"
 
 const Cart = async() => {
   const head = await headers()
@@ -12,6 +14,7 @@ const Cart = async() => {
     headers:Object.fromEntries(head.entries()),
   })
   const {games} = await res.json()
+  const flag = false
   const session = await getServerSession()
   if (!session) {
    return(
@@ -22,10 +25,10 @@ const Cart = async() => {
    )
   } else {
      return (
-    <div className="flex justify-around gap-4 mt-5 w-9/10 mx-auto flex-wrap pb-10">
-      {games.map((game:GameType & {count:number})=>(
-        <div className="w-2/7" key={game.slug} >
-        <GameCard prop={game}/>
+    <div className="flex justify-baseline flex-col gap-4 mt-5 w-9/10 mx-auto pb-10">
+      {games.map((game:CartType & {count:number})=>(
+        <div className="w-full flex justify-between" key={game.slug} >
+        <GameCardLong game={game} flag={flag}/>
         <CartButton game={game} head={head}/>
         </div>
       ))}

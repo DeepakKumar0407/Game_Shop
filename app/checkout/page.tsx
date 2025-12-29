@@ -4,8 +4,11 @@ import { GameType } from "../database/game.model"
 import Image from "next/image"
 import CheckoutForm from "../components/CheckoutForm"
 import { headers } from "next/headers"
+import GameCardLong from "../components/GameCardLong"
+import { CartType } from "../database/cart.model"
 
 const Checkout = async() => {
+  const flag = true
   const head = await headers()
   const res = await fetch('http://localhost:3000/api/cart',{
     method:"GET",
@@ -32,15 +35,15 @@ const Checkout = async() => {
   } else {
      return (
     <div>
-        {games.map((game:GameType & {count:number})=>(
-            <div key={game.slug} className="flex justify-between">
-            <Image src={game.image!} width={50} height={25} alt='image'/>
-            <p>{game.title} x {game.count}</p>
-            <p>{game.price}</p>
-            </div>
-        ))}
-        <p>Grand Total: {totalPrice}</p>
-        <CheckoutForm prop={{user,games,totalPrice}}/>
+      <div className="flex justify-baseline flex-col gap-4 mt-5 w-9/10 mx-auto">
+      {games.map((game:CartType & {count:number})=>(
+        <div key={game.slug}>        
+        <GameCardLong game={game} flag={flag}/>
+        </div>
+      ))}
+      </div>
+      <p>Grand Total: {totalPrice}</p>
+      <CheckoutForm prop={{user,games,totalPrice}}/>
     </div>
   )
   }

@@ -9,7 +9,7 @@ const OrderCard = ({prop}:{prop:any}) => {
         <div className="flex flex-col justify-baseline gap-4">
             {orders.map((order:OrderType & {_id:string})=>(
                 <div key={order._id}>
-                <Link href="">
+                <Link href={`/profile/orders/${order._id}`}>
                 <p>Total Games Orderd: {order.games.length}</p>
                 <p>Total Cost: {order.totalPay}</p>
                 <p>Ordered On: {order.time}</p>
