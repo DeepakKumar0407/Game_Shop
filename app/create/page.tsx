@@ -68,17 +68,17 @@ const Create = () => {
    )
   } else {
     return (
-    <div>
-      <form className="flex flex-wrap mt-5 justify-center w-2/3 mx-auto gap-2 bg-linear-to-t to-[#4d6ec2] from-[#24335f] py-8 rounded-2xl" onSubmit={handleSubmit}>
-          <label className="label">Title: <input type="text" name="title" onChange={handleChange} value={gameData.title} placeholder="Enter title" className="input" required maxLength={100}></input></label>
-          <label className="label">Developer:<input type="type" name="developer" onChange={handleChange} value={gameData.developer} placeholder="Enter developer" className="input" required maxLength={100}></input></label>
-          <label className="label">Producer: <input type="text" name="producer" onChange={handleChange} value={gameData.producer} placeholder="Enter producer" className="input" required maxLength={100}></input></label>
-          <label className="label">Price: <input type="tel" name="price" onChange={handleChange} value={gameData.price} placeholder="Enter price" className="input" required maxLength={10}></input></label>
-          <label className="label">Genre: <input type="text" name="tags" onChange={handleChange} value={gameData.tags} placeholder="Enter,genre,example" className="input" required maxLength={50}></input></label>
-          <label className="label">Platform: <input type="text" name="platform" onChange={handleChange} value={gameData.platform} placeholder="Enter,platform,example" className="input" required maxLength={100}></input></label>
-          <label className="label">Image: <input type="file" name="image" onChange={(e)=>{setGameData(gameData=>({...gameData,image:e.target.files?.[0]||null}))}} className="input" required></input></label>
-          <label className="label">Release Date: <input type="date" name="releaseDate" onChange={handleChange} value={gameData.releaseDate} className="input" required></input></label>
-          <label className="w-5/6 m-2 mr-0 font-bold text-xl flex items-center gap-1.5">Description<textarea name="description" onChange={handleChange} value={gameData.description} placeholder="Enter Descroption" className="input font-normal whitespace-pre-wrap break-words" required maxLength={2000}></textarea></label>
+    <div className="font-robo text-white">
+      <form className="" onSubmit={handleSubmit}>
+          <label className="label">Title: <input type="text" name="title" onChange={handleChange} value={gameData.title} placeholder="Enter title" className="" required maxLength={100}></input></label>
+          <label className="label">Developer:<input type="type" name="developer" onChange={handleChange} value={gameData.developer} placeholder="Enter developer" className="" required maxLength={100}></input></label>
+          <label className="label">Producer: <input type="text" name="producer" onChange={handleChange} value={gameData.producer} placeholder="Enter producer" className="" required maxLength={100}></input></label>
+          <label className="label">Price: <input type="tel" name="price" onChange={handleChange} value={gameData.price} placeholder="Enter price" className="" required maxLength={10}></input></label>
+          <label className="label">Genre: <input type="text" name="tags" onChange={handleChange} value={gameData.tags} placeholder="Enter,genre,example" className="" required maxLength={50}></input></label>
+          <label className="label">Platform: <input type="text" name="platform" onChange={handleChange} value={gameData.platform} placeholder="Enter,platform,example" className="" required maxLength={100}></input></label>
+          <label className="label">Image: <input type="file" name="image" onChange={(e)=>{setGameData(gameData=>({...gameData,image:e.target.files?.[0]||null}))}} className="" required></input></label>
+          <label className="label">Release Date: <input type="date" name="releaseDate" onChange={handleChange} value={gameData.releaseDate} className="" required></input></label>
+          <label className="w-5/6 m-2 mr-0 font-bold text-xl flex items-center gap-1.5">Description<textarea name="description" onChange={handleChange} value={gameData.description} placeholder="Enter Descroption" className="font-normal whitespace-pre-wrap break-words" required maxLength={2000}></textarea></label>
           <div className="label justify-center bg-green-800 rounded p-2 hover:bg-green-500">
             <button type="submit" className="cursor-pointer w-full h-full" onClick={() => window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' })}>Submit</button>
           </div>

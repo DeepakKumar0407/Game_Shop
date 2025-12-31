@@ -13,10 +13,10 @@ const Tags = ({props}:{props:any}) => {
    }
   }
   return (
-    <div className="absolute">
-      <p className="" onClick={handleDropDown}>Tags</p>
+    <div className="absolute z-100 cursor-pointer">
+      <p onClick={handleDropDown}>Tags</p>
         {tags[0].allTags.map((tag:string)=>(
-            <div key={tag} className={`${flag?'hidden':'visible'}`}>
+            <div key={tag} className={`${flag?'hidden':'visible'} p-1 pl-2 pr-2 bg-foreground`}>
             <Link href={`/search/${tag}`} onClick={handleDropDown}>{tag[0].toUpperCase().concat(tag.slice(1))}</Link>
             </div>
         ))}

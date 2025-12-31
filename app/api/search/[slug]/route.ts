@@ -26,7 +26,6 @@ export async function GET(req:NextRequest,{params}:{params:Promise<{slug:string}
         };
     }
     const {exact,firstTwo,first} = createSearchTerm(slug)
-    console.log(exact,firstTwo,first)
     const games = await Game.aggregate([
         {
             $addFields: {

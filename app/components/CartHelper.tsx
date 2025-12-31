@@ -20,9 +20,9 @@ const CartHelper = ({prop}:{prop:any}) => {
         redirect('/checkout')
     }
   return (
-    <div>
-        <button onClick={handleCart}>Add to cart</button>
-        <button onClick={handleBuy}>Buy Now</button>
+    <div className="flex justify-baseline gap-4">
+        <button onClick={handleCart} className="p-1 bg-green-600 rounded">Add to cart</button>
+        <button onClick={handleBuy} className="p-1 bg-green-600 rounded">Buy Now</button>
     </div>
   )
 }

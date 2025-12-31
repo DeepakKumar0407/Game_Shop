@@ -6,7 +6,6 @@ const res = await fetch('http://localhost:3000/api/user',{
     headers:Object.fromEntries(head.entries())
 })
   const {user}= await res.json()
-  console.log({user},'hello')
   return (
     <div>page</div>
   )

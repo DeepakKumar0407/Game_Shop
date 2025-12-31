@@ -1,19 +1,15 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Roboto} from "next/font/google";
 import "./globals.css";
 import AuthProvider from "./components/AuthProvider";
 import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
 import SubNavBar from "./components/SubNavBar";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const RobotoSans = Roboto({
+  variable: "--font-robo-sans",
   subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+  weight:['400','500','600','700']
 });
 
 export const metadata: Metadata = {
@@ -29,7 +25,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`} suppressHydrationWarning={true}
+        className={`${RobotoSans.variable} antialiased bg-background`} suppressHydrationWarning={true}
       >
       <AuthProvider>
         <NavBar/>

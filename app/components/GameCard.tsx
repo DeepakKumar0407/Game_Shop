@@ -1,35 +1,51 @@
+"use client"
 import Image from "next/image";
-import { GameType, GameTypeWithoutDoc } from "../database/game.model";
+import { GameTypeWithoutDoc } from "../database/game.model";
 import Link from "next/link";
+import { useState } from "react";
+import CartHelper from "./CartHelper";
 
-const GameCard = ({prop}:{prop:GameTypeWithoutDoc}) => {
-    const game = prop
-
+const GameCard = ({prop}:{prop:any}) => {
+    const {game,head} = prop
+    const [flag,setFlag] = useState(false)
+    const handleHoverIn = ()=>{
+      setFlag(true)
+    }
+     const handleHoverOut = ()=>{
+      setFlag(false)
+    }
   return (
-    <div className="w-full">
+    <div className="w-full font-robo min-w-full sm:text-sm">
+        <div className="relative w-full h-full">
         <Link href={`http://localhost:3000/games/${game.slug}`}>
-        <div className="relative">
-        <Image src={game.image!} alt="image" width={200} height={100} className="w-full"/>
-        <div className="bg-red-700 absolute bottom-0 left-0 w-full h-full opacity-0 hover:opacity-100 hover:h-full transition-all duration-300 ease-in-out">
-          <p>{game.title}</p>
-          <p>{game.developer}</p>
-          <p>{game.releaseDate}</p>
-          <div className="flex justify-baseline gap-2">
-          {game.tags.map((tag,index)=>(
-            <p  key={index}>{tag}</p>
+        <Image src={game.image!} alt="image" width={200} height={100} className="w-full" onMouseEnter={handleHoverIn} onMouseLeave={handleHoverOut}/>
+        </Link> 
+        <div className={`flex flex-col justify-baseline gap-2 bg-foreground text-white absolute bottom-0 left-0 w-full max-h-0 ease-in-out overflow-hidden transition-[max-height] duration-500 ${flag?"max-h-full":""}`} onMouseEnter={handleHoverIn} onMouseLeave={handleHoverOut}>
+          <p className="font-bold text-2xl ml-2 mt-2">{game.title}</p>
+          <div className="flex justify-between">
+          <p className="ml-2">{game.developer}</p>
+          <p className="mr-2">{game.releaseDate}</p>
+          </div>
+          <div className="flex justify-baseline gap-2 ml-2">
+          {game.tags.map((tag:string,index:number)=>(
+            <p key={index} className="bg-background/50 p-1 rounded-xl">{tag}</p>
           ))}
           </div>
-          <div className="flex justify-baseline gap-2">
-          {game.platform.map((item,index)=>(
-            <p  key={index}>{item}</p>
+          <div className="flex justify-baseline gap-2 ml-2">
+          {game.platform.map((item:string,index:number)=>(
+            <p key={index} className="bg-background/50 p-1 rounded-xl">{item}</p>
           ))}
+          </div>
+          <div className="ml-2 mb-2">
+            <CartHelper prop={{slug:game.slug,head}}/>
           </div>
         </div>
        </div>
-        <div className="flex justify-end ">
+        <div className="w-full flex justify-end">
+          <div className="flex justify-around bg-foreground/70 text-white w-1/3">
            <p>Price: ₹{game.price}</p>
         </div>
-        </Link> 
+        </div>
     </div>
   )
 }

@@ -10,7 +10,6 @@ export async function POST(req:NextRequest){
      await ConnectDb()
     const order = await req.json()
     const placeOrder = await Order.create(order)
-    console.log(placeOrder)
     return NextResponse.json({message:'success',placeOrder},{status:200})
    } catch (error) {
     console.error(error)

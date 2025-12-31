@@ -9,7 +9,6 @@ export async function GET(req:NextRequest,{params}:{params:Promise<{slug:string}
         await ConnectDb()
         const {slug} = await params
         const order = await Order.findOne({_id:slug})
-        console.log(order)
         return NextResponse.json({message:"success",order},{status:200})
     } catch (error) {
         console.error(error)

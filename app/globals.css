@@ -8,8 +8,7 @@
 @theme inline {
   --color-background: var(--primary);
   --color-foreground: var(--secondary);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-robo: var(--font-robo-sans);
 }
 
 body {
