@@ -18,7 +18,7 @@ const Cart = async() => {
   const session = await getServerSession()
   if (!session) {
    return(
-    <div>
+    <div className="font-robo mt-10 text-white">
     <p>You must be logged in to see this page</p>
     <Link href="/login">Login</Link>
     </div>

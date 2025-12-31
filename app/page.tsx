@@ -11,14 +11,14 @@ export default async function Home() {
   const session = await getServerSession()
   if (!session) {
    return(
-    <div className="bg-background">
+    <div className="font-robo mt-10 text-white">
     <p>You must be logged in to see this page</p>
     <Link href="/login">Login</Link>
     </div>
    )
   } else {
     return (
-    <div className="flex justify-around gap-4 mt-5 w-9/10 mx-auto flex-wrap pb-10">
+    <div className="flex justify-around gap-4 mt-3 w-9/10 mx-auto flex-wrap pb-15 font-robo text-white">
       {games.slice(0,6).map((game:GameType)=>(
         <div className="min-w-2/7 min-h-full" key={game.slug}>
         <GameCard  prop={{game,head}}/>

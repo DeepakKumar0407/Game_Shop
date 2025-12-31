@@ -21,8 +21,8 @@ const CartHelper = ({prop}:{prop:any}) => {
     }
   return (
     <div className="flex justify-baseline gap-4">
-        <button onClick={handleCart} className="p-1 bg-green-600 rounded">Add to cart</button>
-        <button onClick={handleBuy} className="p-1 bg-green-600 rounded">Buy Now</button>
+        <button onClick={handleCart} className="p-1 bg-green-600 rounded cursor-pointer">Add to cart</button>
+        <button onClick={handleBuy} className="p-1 bg-green-600 rounded cursor-pointer">Buy Now</button>
     </div>
   )
 }

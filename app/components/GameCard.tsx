@@ -20,22 +20,26 @@ const GameCard = ({prop}:{prop:any}) => {
         <Link href={`http://localhost:3000/games/${game.slug}`}>
         <Image src={game.image!} alt="image" width={200} height={100} className="w-full" onMouseEnter={handleHoverIn} onMouseLeave={handleHoverOut}/>
         </Link> 
-        <div className={`flex flex-col justify-baseline gap-2 bg-foreground text-white absolute bottom-0 left-0 w-full max-h-0 ease-in-out overflow-hidden transition-[max-height] duration-500 ${flag?"max-h-full":""}`} onMouseEnter={handleHoverIn} onMouseLeave={handleHoverOut}>
-          <p className="font-bold text-2xl ml-2 mt-2">{game.title}</p>
+        <div className={`flex flex-col justify-baseline gap-2 bg-foreground/90 text-white text-xs md:text-base absolute bottom-0 left-0 min-w-full max-h-0 ease-in-out overflow-hidden transition-[max-height] duration-500 ${flag?"max-h-full":""}`} onMouseEnter={handleHoverIn} onMouseLeave={handleHoverOut}>
+          <Link href={`http://localhost:3000/games/${game.slug}`}>
+          <div className="flex flex-col justify-baseline gap-2 ">
+          <p className="font-bold md:text-2xl ml-2 mt-2">{game.title}</p>
           <div className="flex justify-between">
           <p className="ml-2">{game.developer}</p>
           <p className="mr-2">{game.releaseDate}</p>
           </div>
-          <div className="flex justify-baseline gap-2 ml-2">
+          <div className="flex justify-baseline gap-2 ml-2 overflow-hidden">
           {game.tags.map((tag:string,index:number)=>(
-            <p key={index} className="bg-background/50 p-1 rounded-xl">{tag}</p>
+            <p key={index} className="bg-background/50 p-2 rounded-xl">{tag}</p>
           ))}
           </div>
-          <div className="flex justify-baseline gap-2 ml-2">
+          <div className="flex justify-baseline gap-2 ml-2 overflow-hidden">
           {game.platform.map((item:string,index:number)=>(
-            <p key={index} className="bg-background/50 p-1 rounded-xl">{item}</p>
+            <p key={index} className="bg-background/50 p-2 rounded-xl">{item}</p>
           ))}
           </div>
+          </div>
+          </Link>
           <div className="ml-2 mb-2">
             <CartHelper prop={{slug:game.slug,head}}/>
           </div>

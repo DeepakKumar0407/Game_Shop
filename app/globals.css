@@ -14,3 +14,15 @@
 body {
   font-family: Arial, Helvetica, sans-serif;
 }
+.label {
+  @apply font-bold text-xl w-1/2 block text-white/80
+}
+
+.input {
+  @apply w-9/10 block placeholder:text-center text-white
+}
+::-webkit-calendar-picker-indicator {
+    filter: invert(1)
+            brightness(0.6)
+            
+}

@@ -11,16 +11,16 @@ const Games = async () => {
   const session = await getServerSession()
   if (!session) {
    return(
-    <div>
+    <div className="font-robo mt-10 text-white">
     <p>You must be logged in to see this page</p>
     <Link href="/login">Login</Link>
     </div>
    )
   } else {
     return (
-    <div className="flex justify-around gap-4 mt-5 w-9/10 mx-auto flex-wrap pb-10">
+    <div className="flex justify-around gap-4 mt-3 w-9/10 mx-auto flex-wrap pb-15">
       {games.map((game:GameType)=>(
-        <div className="w-2/7" key={game.slug}>
+        <div className="min-w-2/7 min-h-full" key={game.slug}>
         <GameCard  prop={{game,head}}/>
         </div>
       ))}

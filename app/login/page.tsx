@@ -6,7 +6,7 @@ export default async function LoginPage() {
   const session = await getServerSession()
   if (!session) {
    return(
-    <div className="">
+    <div className="font-robo mt-10 text-white">
         <LoginForm />
     </div>
    )

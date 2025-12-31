@@ -19,7 +19,7 @@ const userRes = await fetch("http://localhost:3000/api/order",{
 const {order} = await userRes.json()
  if (!session) {
    return(
-    <div>
+    <div className="font-robo mt-10 text-white">
     <p>You must be logged in to see this page</p>
     <Link href="/login">Login</Link>
     </div>
