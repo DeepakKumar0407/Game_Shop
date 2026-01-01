@@ -17,9 +17,16 @@ body {
 .label {
   @apply font-bold text-xl w-1/2 block text-white/80
 }
+.label_login {
+  @apply font-bold text-xs md:text-xl w-full block text-white/80
+}
 
 .input {
-  @apply w-9/10 block placeholder:text-center text-white
+  @apply w-8/10 block placeholder:text-center text-white border-2 border-foreground rounded-xl p-2 text-xs md:text-xl mb-2
+}
+
+.input_login {
+  @apply w-full block placeholder:text-center text-white border-2 border-foreground rounded-xl p-2 text-xs md:text-xl
 }
 ::-webkit-calendar-picker-indicator {
     filter: invert(1)

@@ -10,7 +10,7 @@ export async function POST(req:NextRequest){
     return NextResponse.json({message:'User Created',user},{status:200})
    } catch (error) {
     console.error(error)
-    return NextResponse.json({error:"Something went wrong"},{status:400})
+    return NextResponse.json({message:"Something went wrong",error},{status:400})
    }
 
 }

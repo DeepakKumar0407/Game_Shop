@@ -26,14 +26,14 @@ const {order} = await userRes.json()
    )
   } else {
     return(
-      <div className="flex justify-between">
+      <div className="flex justify-between mb-15 font-robo text-white">
         <div className="w-1/3">
           <p>Name: {user.name}</p>
           <p>Email: {user.email}</p>
           <p>Phone: {user.phone}</p>
           <LogoutButton/>
         </div>
-        <div className="w-2/3"> 
+        <div className="w-1/3 overflow-auto h-125"> 
           <OrderCard prop={order}/>
         </div>
       </div>

@@ -12,7 +12,7 @@ const OrderCard = ({prop}:{prop:any}) => {
                 <Link href={`/profile/orders/${order._id}`}>
                 <p>Total Games Orderd: {order.games.length}</p>
                 <p>Total Cost: {order.totalPay}</p>
-                <p>Ordered On: {order.time}</p>
+                {/* <p>Ordered On: {Date().split(" ").slice(0,4).join(" ")}</p> */}
                 </Link>
                 </div>
             ))}

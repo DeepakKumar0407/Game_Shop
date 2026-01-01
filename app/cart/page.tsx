@@ -25,14 +25,18 @@ const Cart = async() => {
    )
   } else {
      return (
-    <div className="flex justify-baseline flex-col gap-4 mt-5 w-9/10 mx-auto pb-10">
+    <div className="flex justify-baseline flex-col gap-4 mt-5 w-7/10  mx-auto mb-15 font-robo text-white">
       {games.map((game:CartType & {count:number})=>(
-        <div className="w-full flex justify-between" key={game.slug} >
+        <div key={game.slug} className="flex justify-baseline gap-3">
+        <div className="w-3/4 flex justify-baseline bg-foreground/40 hover:bg-foreground" >
         <GameCardLong game={game} flag={flag}/>
+        </div>
         <CartButton game={game} head={head}/>
         </div>
       ))}
-      <Link href="/checkout">Buy</Link>
+      <div className="w-3/4 flex justify-end">
+      <Link href="/checkout" className="bg-green-800 hover:bg-green-500 p-3 pl-5 pr-5 mt-3 rounded-xl text-center">Buy</Link>
+      </div>
     </div>
   )
   }

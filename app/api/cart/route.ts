@@ -5,7 +5,6 @@ import { WithUndefined } from "@/lib/types";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../auth/[...nextauth]/route";
 import Cart, { CartTypeWithoutDocs } from "@/app/database/cart.model";
-import { Session } from "inspector/promises";
 
 
 export async function POST(req:NextRequest){

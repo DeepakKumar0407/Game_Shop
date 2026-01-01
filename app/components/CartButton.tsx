@@ -3,6 +3,8 @@
 import { useState } from "react"
 import { GameType } from "../database/game.model"
 import { ReadonlyHeaders } from "next/dist/server/web/spec-extension/adapters/headers"
+import { PlusIcon } from "@heroicons/react/24/solid"
+import { MinusIcon } from "@heroicons/react/24/solid"
 
 const CartButton = ({game,head}:{game:GameType & {count:number},head:ReadonlyHeaders}) => {
     const [count,setCount] = useState(game.count)
@@ -28,10 +30,10 @@ const CartButton = ({game,head}:{game:GameType & {count:number},head:ReadonlyHea
   }
  
   return (
-    <div>
+    <div className="flex flex-col gap-2 justify-baseline">
       <p>Total: {count}</p>
-      <button onClick={()=>addGame(game.slug)}>A</button>
-      <button onClick={()=>deleteGame(game.slug)}>D</button>
+      <button className=" bg-green-800 hover:bg-green-500 rounded cursor-pointer text-center" onClick={()=>addGame(game.slug)}>+</button>
+      <button className=" bg-foreground/50 hover:bg-foreground rounded cursor-pointer text-center"  onClick={()=>deleteGame(game.slug)}>-</button>
     </div>
   )
 }

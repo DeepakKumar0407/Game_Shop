@@ -34,16 +34,17 @@ const Checkout = async() => {
    )
   } else {
      return (
-    <div>
-      <div className="flex justify-baseline flex-col gap-4 mt-5 w-9/10 mx-auto">
+    <div className="font-robo text-white flex justify-baseline w-9/10 mx-auto mb-15 gap-2">
+      <div className="flex justify-baseline flex-col gap-4 mt-5 w-2/3">
       {games.map((game:CartType & {count:number})=>(
-        <div key={game.slug}>        
+        <div key={game.slug} className="w-full flex justify-baseline bg-foreground/40 hover:bg-foreground">        
         <GameCardLong game={game} flag={flag}/>
         </div>
       ))}
       </div>
-      <p>Grand Total: {totalPrice}</p>
+      <div className="w-1/3 mt-5 p-3 bg-foreground/40 h-fit">
       <CheckoutForm prop={{user,games,totalPrice}}/>
+      </div>
     </div>
   )
   }

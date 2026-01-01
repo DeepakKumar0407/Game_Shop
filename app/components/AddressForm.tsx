@@ -3,6 +3,7 @@ import { useEffect, useState } from "react"
 import { UserAddress, UserType } from "../database/user.model"
 import { useSession } from "next-auth/react"
 import Link from "next/link"
+import { TrashIcon } from "@heroicons/react/24/outline"
 
 const AddressForm = ({props}:{props:any}) => {
     const {data:session} = useSession()
@@ -83,25 +84,27 @@ const AddressForm = ({props}:{props:any}) => {
    )
   } else {
   return (
-      <div className="flex justify-baseline gap-4">
-      <form className="flex flex-wrap mt-5 justify-center w-3/5 gap-2 bg-linear-to-t to-[#4d6ec2] from-[#24335f] py-8 rounded-2xl" onSubmit={handleSubmit}>
-          <label className="label">Flat: <input type="text" name="flat" onChange={handleChange} value={addressData.flat} placeholder="Enter flat" className="input" required ></input></label>
-          <label className="label">Street: <input type="text" name="street" onChange={handleChange} value={addressData.street} placeholder="Enter street" className="input" required ></input></label>
-          <label className="label">Area: <input type="text" name="area" onChange={handleChange} value={addressData.area} placeholder="Enter area" className="input" required ></input></label>
-          <label className="label">City: <input type="text" name="city" onChange={handleChange} value={addressData.city} placeholder="Enter city" className="input" required></input></label>
-          <label className="label">State: <input type="text" name="state" onChange={handleChange} value={addressData.state} placeholder="Enter state" className="input" required></input></label>
-          <label className="label">Country: <input type="text" name="country" onChange={handleChange} value={addressData.country} placeholder="Enter country" className="input" required></input></label>
-          <label className="label">Pincode: <input type="text" name="pincode" onChange={handleChange} value={addressData.pincode} placeholder="Enter pincode" className="input" required></input></label>
-          <div className="label justify-center bg-green-800 rounded p-2 hover:bg-green-500">
-            <button type="submit" className="cursor-pointer w-full h-full" onClick={() => window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' })}>Submit</button>
+      <div className="font-robo text-white md:max-w-7/10 max-w-full mx-auto flex justify-baseline gap-4 mb-15 mt-5">
+      <form className="w-2/3 flex flex-wrap justify-baseline ml-4 bg-foreground/10 p-3" onSubmit={handleSubmit}>
+          <h1 className="text-sm md:text-2xl lg:text-4xl text-center font-bold w-full mt-2 mb-2">Add Address</h1>
+          <label className="label mb-2">Flat: <input type="text" name="flat" onChange={handleChange} value={addressData.flat} placeholder="Enter flat" className="input" required ></input></label>
+          <label className="label mb-2">Street: <input type="text" name="street" onChange={handleChange} value={addressData.street} placeholder="Enter street" className="input" required ></input></label>
+          <label className="label mb-2">Area: <input type="text" name="area" onChange={handleChange} value={addressData.area} placeholder="Enter area" className="input" required ></input></label>
+          <label className="label mb-2">City: <input type="text" name="city" onChange={handleChange} value={addressData.city} placeholder="Enter city" className="input" required></input></label>
+          <label className="label mb-2">State: <input type="text" name="state" onChange={handleChange} value={addressData.state} placeholder="Enter state" className="input" required></input></label>
+          <label className="label mb-2">Country: <input type="text" name="country" onChange={handleChange} value={addressData.country} placeholder="Enter country" className="input" required></input></label>
+          <label className="label mb-2">Pincode: <input type="text" name="pincode" onChange={handleChange} value={addressData.pincode} placeholder="Enter pincode" className="input" required></input></label>
+          <div className="w-full flex justify-center items-center mt-2 mb-2">
+            <button type="submit" className="cursor-pointer w-1/3 h-fit  p-2 bg-green-800 rounded hover:bg-green-500" onClick={() => window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' })}>Submit</button>
           </div>
           <p>{submitted&&"Address Submitted"}{isLoading&&"Loading..."}</p>  
         </form>
-        <div className="w-1/3">
+        <div className="w-1/3 bg-foreground/10 p-3 flex flex-col gap-2 h-fit">
            {userAddress&&userAddress.map((address:UserAddress&{_id:any})=>(
             <div key={address._id}>
-            <p >{Object.values(address).slice(0,6).join(',')}</p>
-            <button onClick={()=>handleDelete(address._id)}>Delete</button>
+            <p>{Object.values(address).slice(0,6).join(',')}</p>
+            <button className="bg-foreground/50 rounded p-2 hover:bg-foreground mb-2" onClick={()=>handleDelete(address._id)}><TrashIcon className="w-5 h-5"/></button>
+            <hr/>
             </div>
            ))}
         </div>

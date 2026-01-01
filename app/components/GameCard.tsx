@@ -20,7 +20,7 @@ const GameCard = ({prop}:{prop:any}) => {
         <Link href={`http://localhost:3000/games/${game.slug}`}>
         <Image src={game.image!} alt="image" width={200} height={100} className="w-full" onMouseEnter={handleHoverIn} onMouseLeave={handleHoverOut}/>
         </Link> 
-        <div className={`flex flex-col justify-baseline gap-2 bg-foreground/90 text-white text-xs md:text-base absolute bottom-0 left-0 min-w-full max-h-0 ease-in-out overflow-hidden transition-[max-height] duration-500 ${flag?"max-h-full":""}`} onMouseEnter={handleHoverIn} onMouseLeave={handleHoverOut}>
+        <div className={`flex flex-col justify-baseline gap-2 bg-foreground/90 text-white text-xs xl:text-sm absolute bottom-0 left-0 min-w-full max-h-0 ease-in-out overflow-hidden transition-[max-height] duration-500 ${flag?"max-h-full":""}`} onMouseEnter={handleHoverIn} onMouseLeave={handleHoverOut}>
           <Link href={`http://localhost:3000/games/${game.slug}`}>
           <div className="flex flex-col justify-baseline gap-2 ">
           <p className="font-bold md:text-2xl ml-2 mt-2">{game.title}</p>
