@@ -44,7 +44,7 @@ body {
   @apply flex justify-between bg-foreground fixed bottom-0 left-0 w-full text-white font-robo items-center
 }
 .div_game_card{
-  @apply flex flex-col justify-baseline gap-2 bg-foreground/90 text-white text-xs xl:text-sm absolute bottom-0 left-0 min-w-full max-w-full
+  @apply flex flex-col justify-baseline gap-2 bg-foreground/90 text-white text-xs absolute bottom-0 left-0 min-w-full max-w-full
 }
 .div_login_form{
   @apply font-robo text-white w-1/3 mx-auto bg-foreground/20 p-3 rounded-xl

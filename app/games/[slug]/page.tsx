@@ -1,5 +1,7 @@
 import CartHelper from "@/app/components/CartHelper"
 import NoLoginPage from "@/app/components/NoLoginPage"
+import ReviewForm from "@/app/components/ReviewForm"
+import { ReviewType } from "@/app/database/game.model"
 import { getServerSession } from "next-auth"
 import { headers } from "next/headers"
 import Image from "next/image"
@@ -11,6 +13,11 @@ const GameDetails = async ({params}:{params:Promise<{slug:string}>}) => {
   const head = await headers()
   const res = await fetch(`http://localhost:3000/api/Games/${slug}`)
   const {game} = await res.json()
+  const orderRes = await fetch(`http://localhost:3000/api/order`,{
+    method:"GET",
+    headers:Object.fromEntries(head.entries())
+  })
+  const {order} = await orderRes.json()
   const session = await getServerSession()
   if (!session) {
    return(
@@ -28,7 +35,7 @@ const GameDetails = async ({params}:{params:Promise<{slug:string}>}) => {
       </div>
       <div>
         <h1>Reviews</h1>
-        <p>{game.reviews}</p>
+        <ReviewForm slug={slug} orders={order} head={head}/>
       </div>
       </div>
       <div className="div_game_detail_right">

@@ -1,6 +1,8 @@
 import mongoose, {Schema, Model,models,Document} from 'mongoose'
+import { unique } from 'next/dist/build/utils';
 
 export interface ReviewType {
+    userId:string;
     title:string;
     description:string;
     rating:number;
@@ -13,7 +15,7 @@ export interface GameTypeWithoutDoc{
     developer:string;
     producer:string;
     description:string;
-    reviews?:string[];
+    reviews?:ReviewType[];
     releaseDate:string;
     tags:string[];
     price:string;
@@ -28,7 +30,7 @@ export interface GameType extends Document{
     developer:string;
     producer:string;
     description:string;
-    reviews?:string[];
+    reviews?:ReviewType[];
     releaseDate:string;
     tags:string[];
     price:string;
@@ -64,10 +66,26 @@ const GameSchema = new Schema<GameType>({
         type:[String],
         required:true
     },
-      reviews:{
-        type:[String],
-        required:true
-    },
+      reviews:[
+        {
+          userId:{
+            type:String,
+            required:true,
+          },
+          title:{
+            type:String,
+            required:true
+          },
+           description:{
+            type:String,
+            required:true
+          },
+           rating:{
+            type:Number,
+            required:true
+          }
+        }
+      ],
       releaseDate:{
         type:String,
         required:true

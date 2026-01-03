@@ -23,7 +23,7 @@ const GameCard = ({prop}:{prop:any}) => {
         <div className={`div_game_card max-h-0 ease-in-out overflow-hidden transition-[max-height] duration-500 ${flag?"max-h-full":""}`} onMouseEnter={handleHoverIn} onMouseLeave={handleHoverOut}>
           <Link href={`http://localhost:3000/games/${game.slug}`}>
           <div className="flex flex-col w-full justify-baseline gap-2 ">
-          <p className="font-bold md:text-2xl ml-2 mt-2">{game.title}</p>
+          <p className="font-bold lg:text-xl ml-2 mt-2">{game.title}</p>
           <div className="flex justify-between">
           <p className="ml-2">{game.developer}</p>
           <p className="mr-2">{game.releaseDate}</p>
