@@ -1,4 +1,5 @@
 import CartHelper from "@/app/components/CartHelper"
+import NoLoginPage from "@/app/components/NoLoginPage"
 import { getServerSession } from "next-auth"
 import { headers } from "next/headers"
 import Image from "next/image"
@@ -13,14 +14,11 @@ const GameDetails = async ({params}:{params:Promise<{slug:string}>}) => {
   const session = await getServerSession()
   if (!session) {
    return(
-    <div className="font-robo mt-10 text-white">
-    <p>You must be logged in to see this page</p>
-    <Link href="/login">Login</Link>
-    </div>
+    <NoLoginPage/>
    )
   } else {
     return (
-    <div className="flex justify-baseline font-robo text-white gap-10 pb-15">
+    <div className="div_game_detail">
       <div className="w-2/3">
       <h1 className="font-bold m-5 text-4xl">{game.title}</h1>
       <Image src={game.image} alt="game image" width={1000} height={500} className="ml-5 w-full"/>
@@ -33,20 +31,20 @@ const GameDetails = async ({params}:{params:Promise<{slug:string}>}) => {
         <p>{game.reviews}</p>
       </div>
       </div>
-      <div className="flex flex-col gap-2 justify-around w-1/3 bg-foreground/30 max-h-fit mt-20 p-3 mr-5">
+      <div className="div_game_detail_right">
         <p><span className="font-bold text-xl">Release Date:</span> {game.releaseDate}</p>
         <p><span className="font-bold text-xl">Developer:</span>  {game.developer}</p>
         <p><span className="font-bold text-xl">Producer:</span>  {game.producer}</p>
         <div className="flex justify-baseline gap-2 flex-wrap items-center">
           <p className="font-bold text-xl">Tags:</p>
-          {game.tags.map((tag:string)=>(
-            <p key={tag} className="bg-background/50 p-2 rounded-xl">{tag}</p>
+          {game.tags.map((tag:string,index:number)=>(
+            <p key={index} className="bg-background/50 p-2 rounded-xl">{tag}</p>
           ))}
         </div>
         <div className="flex justify-baseline gap-2 flex-wrap items-center">
           <p className="font-bold text-xl">Platforms:</p>
-          {game.platform.map((plat:string)=>(
-            <p key={plat} className="bg-background/50 p-2 rounded-xl">{plat}</p>
+          {game.platform.map((plat:string,index:number)=>(
+            <p key={index} className="bg-background/50 p-2 rounded-xl">{plat}</p>
           ))}
         </div>
         <p><span className="font-bold text-xl">Price:</span>  ₹ {game.price}</p>

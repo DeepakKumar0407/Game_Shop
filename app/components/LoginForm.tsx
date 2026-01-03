@@ -38,15 +38,15 @@ const LoginForm = () => {
       }
     }
   return (
-  <div className="font-robo text-white w-1/3 mx-auto bg-foreground/20 p-3 rounded-xl">
+  <div className="div_login_form">
     <h1 className="text-4xl text-center font-bold mb-5">Login</h1>
     <form onSubmit={handleSubmit} className="w-full flex flex-col gap-8">
       <label className="label_login">Email: <input type="email" value={userData.email} placeholder="Enter Email" name="email" className="input_login" onChange={handleChange} required></input></label>
       <label className="label_login">Password: <input type="password" value={userData.password} placeholder="Enter Password" name="password" className="input_login" onChange={handleChange} required></input></label>
       <p className="text-xs md:text-xl">{loginFailed&&"Login Failed"}</p>
       <div className="flex justify-around w-full">
-        <Link href={"/register"} className="cursor-pointer w-1/3 h-full bg-gray-600  rounded p-2 hover:bg-white text-center text-black" >Sign up</Link>
-        <button type="submit" className="cursor-pointer w-1/3 h-full bg-green-800 rounded p-2 hover:bg-green-500 text-center" >Login</button>
+        <Link href={"/register"} className="button_login_gray" >Sign up</Link>
+        <button type="submit" className="button_login_green" >Login</button>
       </div>
     </form>
    </div>

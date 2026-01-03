@@ -10,10 +10,10 @@ const NavBar = () => {
         </div>
         <AddressHelper/>
         <div className="flex justify-around items-center gap-2">
-            <Link href="/" className="hover:bg-red-800 border-2 border-white rounded-2xl p-4 text-white font-bold">Home</Link>
-            <Link href="/games" className="hover:bg-red-800 border-2 border-white rounded-2xl p-4 text-white font-bold">Games</Link>
-            <Link href="/create" className="hover:bg-red-800 border-2 border-white rounded-2xl p-4 text-white font-bold">Create</Link>
-            <Link href="/about" className="hover:bg-red-800 border-2 border-white rounded-2xl p-4 text-white font-bold">About</Link>
+            <Link href="/" className="link_nav">Home</Link>
+            <Link href="/games" className="link_nav">Games</Link>
+            <Link href="/create" className="link_nav">Create</Link>
+            <Link href="/about" className="link_nav">About</Link>
         </div>
     </div>
   )

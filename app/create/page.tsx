@@ -2,6 +2,7 @@
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { useState } from "react";
+import NoLoginPage from "../components/NoLoginPage";
 
 
 const Create = () => {
@@ -61,15 +62,12 @@ const Create = () => {
   }
   if (!session) {
    return(
-    <div className="font-robo mt-10 text-white">
-    <p>You must be logged in to see this page</p>
-    <Link href="/login">Login</Link>
-    </div>
+   <NoLoginPage/>
    )
   } else {
     return (
-    <div className="font-robo text-white md:max-w-7/10 max-w-full mx-auto bg-foreground/10 mb-15">
-      <h1 className="text-3xl font-bold mt-5 mb-5 p-3 text-center bg-foreground/70">Add a Game</h1>
+    <div className="div_create">
+      <h1 className="h1_create">Add a Game</h1>
       <form className="w-full flex flex-wrap justify-around ml-4" onSubmit={handleSubmit}>
           <label className="label">Title: <input type="text" name="title" onChange={handleChange} value={gameData.title} placeholder="Enter title" className="input" required maxLength={100}></input></label>
           <label className="label">Developer:<input type="text" name="developer" onChange={handleChange} value={gameData.developer} placeholder="Enter developer" className="input" required maxLength={100}></input></label>
@@ -79,9 +77,9 @@ const Create = () => {
           <label className="label">Platform: <input type="text" name="platform" onChange={handleChange} value={gameData.platform} placeholder="Enter,platform,example" className="input" required maxLength={100}></input></label>
           <label className="label">Image: <input type="file" name="image" onChange={(e)=>{setGameData(gameData=>({...gameData,image:e.target.files?.[0]||null}))}} className="input" required></input></label>
           <label className="label">Release Date: <input type="date" name="releaseDate" onChange={handleChange} value={gameData.releaseDate} className="block text-[#807F80]" required></input></label>
-          <label className="font-bold text-2xl block w-full text-center mt-2">Description<textarea name="description" onChange={handleChange} value={gameData.description} placeholder="    Write game details" className="font-normal whitespace-pre-wrap break-words block w-9/10 placeholder:font-bold border-2 rounded-xl border-foreground" required maxLength={2000}></textarea></label>
+          <label className="label_description">Description<textarea name="description" onChange={handleChange} value={gameData.description} placeholder="    Write game details" className="input_description" rows={10} required maxLength={2000}></textarea></label>
           <div className="w-full flex justify-center mt-3 mb-3">
-            <button type="submit" className="cursor-pointer w-2/10 h-full bg-green-800 rounded p-2 hover:bg-green-500" onClick={() => window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' })}>Submit</button>
+            <button type="submit" className="button_submit" onClick={() => window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' })}>Submit</button>
           </div>
           <p>{isLoading&&'Loading...'}{submitted&& 'Game Submitted'}</p>
         </form>

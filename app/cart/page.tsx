@@ -6,6 +6,7 @@ import CartButton from "../components/CartButton"
 import { headers } from "next/headers"
 import GameCardLong from "../components/GameCardLong"
 import { CartType } from "../database/cart.model"
+import NoLoginPage from "../components/NoLoginPage"
 
 const Cart = async() => {
   const head = await headers()
@@ -18,10 +19,7 @@ const Cart = async() => {
   const session = await getServerSession()
   if (!session) {
    return(
-    <div className="font-robo mt-10 text-white">
-    <p>You must be logged in to see this page</p>
-    <Link href="/login">Login</Link>
-    </div>
+   <NoLoginPage/>
    )
   } else {
      return (

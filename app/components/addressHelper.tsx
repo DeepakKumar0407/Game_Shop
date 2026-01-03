@@ -23,7 +23,7 @@ const AddressHelper =() => {
     return (
     <Link href='/address' className="w-2/10 flex items-center">
     <div className="w-full">
-        <p className="overflow-hidden text-nowrap text-ellipsis text-white font-bold hover:text-black">{user?.address?.[0]?.flat+","}{user?.address?.[0]?.street+","}{user?.address?.[0]?.city}</p>
+      {user && <p className="p_address_helper">{user?.address?.[0]?.flat+","}{user?.address?.[0]?.street+","}{user?.address?.[0]?.city}</p>}
     </div>
     </Link>
   )

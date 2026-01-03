@@ -1,22 +1,20 @@
 import { getServerSession } from "next-auth"
 import Link from "next/link"
+import NoLoginPage from "../components/NoLoginPage"
 
 
 const About = async() => {
   const session = await getServerSession()
   if (!session) {
    return(
-    <div className="font-robo mt-10 text-white">
-    <p>You must be logged in to see this page</p>
-    <Link href="/login">Login</Link>
-    </div>
+   <NoLoginPage/>
    )
   } else {
      return (
     <div className="mt-3 pb-15 font-robo text-white">
         <h1 className="text-center mb-5 text-4xl font-bold">About us</h1>
-        <div className="flex justify-between max-w-full md:max-w-7/8 mx-auto pb-15">
-        <div className="w-2/5 bg-linear-to-b from-foreground to-foreground/40 border-4 border-white rounded-2xl p-2">
+        <div className="div_about">
+        <div className="div_about_left">
          <p className="text-xl">Welcome to Game Store, your go-to destination for discovering, buying, and enjoying great games.
           We're passionate gamers ourselves, and our goal is to make it easy for players of all kinds to find games they love—whether 
           you're into action-packed adventures, competitive multiplayer, or relaxing indie titles.<br/><br/>
@@ -27,7 +25,7 @@ const About = async() => {
           Thanks for being part of the journey.
           </p>
           </div>
-          <div className="w-2/5 max-h-fit flex flex-col gap-3 bg-linear-to-b from-foreground to-foreground/40 border-4 border-white rounded-2xl p-2">
+          <div className="div_about_right">
             <h2 className="text-2xl">Contact us:</h2>
             <p><span className="text-xl">Email: </span> dummy.email092@gmail.com</p>
             <p><span className="text-xl">Number: </span>9822210394</p>

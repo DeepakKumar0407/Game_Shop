@@ -1,4 +1,5 @@
 import GameCard from "@/app/components/GameCard"
+import NoLoginPage from "@/app/components/NoLoginPage"
 import { GameType } from "@/app/database/game.model"
 import { getServerSession } from "next-auth"
 import { headers } from "next/headers"
@@ -12,19 +13,19 @@ const SearchResults = async ({params}:{params:Promise<{slug:string}>}) => {
   const session = await getServerSession()
   if (!session) {
    return(
-    <div className="font-robo mt-10 text-white">
-    <p>You must be logged in to see this page</p>
-    <Link href="/login">Login</Link>
-    </div>
+    <NoLoginPage/>
    )
   } else {
   return (
-    <div className="flex justify-around gap-4 mt-3 w-9/10 mx-auto flex-wrap pb-15">
+    <div>
+    <h1 className="m-10 text-4xl font-bold text-white ">Results for {decodeURIComponent(slug)}</h1>
+    <div className="div_main">
       {games.map((game:GameType)=>(
               <div className="min-w-2/7 min-h-full" key={game.slug}>
               <GameCard  prop={{game,head}}/>
               </div>
             ))}
+    </div>
     </div>
   )
 }

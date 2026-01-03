@@ -11,19 +11,22 @@ export default async function Home() {
   const session = await getServerSession()
   if (!session) {
    return(
-    <div className="font-robo mt-10 text-white">
+    <div className="div">
     <p>You must be logged in to see this page</p>
     <Link href="/login">Login</Link>
     </div>
    )
   } else {
     return (
-    <div className="flex justify-around gap-4 mt-3 w-9/10 mx-auto flex-wrap pb-15 font-robo text-white">
+    <div>
+    <h1 className="m-10 text-4xl font-bold text-white ">Featured Games</h1>
+    <div className="div_main">
       {games.slice(0,6).map((game:GameType)=>(
         <div className="min-w-2/7 min-h-full" key={game.slug}>
         <GameCard  prop={{game,head}}/>
         </div>
       ))}
+    </div>
     </div>
   )
   }

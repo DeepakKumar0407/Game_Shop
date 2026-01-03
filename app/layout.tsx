@@ -25,7 +25,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${RobotoSans.variable} antialiased bg-background`} suppressHydrationWarning={true}
+        className={`${RobotoSans.variable} antialiased bg-background  text-sm md:text-base`} suppressHydrationWarning={true}
       >
       <AuthProvider>
         <NavBar/>

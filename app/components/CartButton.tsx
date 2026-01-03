@@ -32,8 +32,8 @@ const CartButton = ({game,head}:{game:GameType & {count:number},head:ReadonlyHea
   return (
     <div className="flex flex-col gap-2 justify-baseline">
       <p>Total: {count}</p>
-      <button className=" bg-green-800 hover:bg-green-500 rounded cursor-pointer text-center" onClick={()=>addGame(game.slug)}>+</button>
-      <button className=" bg-foreground/50 hover:bg-foreground rounded cursor-pointer text-center"  onClick={()=>deleteGame(game.slug)}>-</button>
+      <button className="button_add" onClick={()=>addGame(game.slug)}>+</button>
+      <button className="button_remove"  onClick={()=>deleteGame(game.slug)}>-</button>
     </div>
   )
 }

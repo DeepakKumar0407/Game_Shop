@@ -7,7 +7,7 @@ const SubNavBar = async () => {
     const res = await fetch("http://localhost:3000/api/tags")
     const {tags} = await res.json()
   return (
-    <div className="flex justify-around bg-foreground/50 text-white font-robo relative font-medium">
+    <div className="div_sub_navbar">
         <div className="flex justify-baseline gap-2 flex-col mt-3">
             <Tags props={tags}/>
         </div>

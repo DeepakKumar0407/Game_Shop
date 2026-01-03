@@ -77,16 +77,17 @@ const AddressForm = ({props}:{props:any}) => {
       }
   if (!session) {
    return(
-    <div>
+    <div className="div">
     <p>You must be logged in to see this page</p>
     <Link href="/login">Login</Link>
     </div>
    )
   } else {
   return (
-      <div className="font-robo text-white md:max-w-7/10 max-w-full mx-auto flex justify-baseline gap-4 mb-15 mt-5">
-      <form className="w-2/3 flex flex-wrap justify-baseline ml-4 bg-foreground/10 p-3" onSubmit={handleSubmit}>
-          <h1 className="text-sm md:text-2xl lg:text-4xl text-center font-bold w-full mt-2 mb-2">Add Address</h1>
+      <div className="div_address">
+      <div className="div_address_left">
+      <form className="form_address" onSubmit={handleSubmit}>
+          <h1 className="h1_address">Add Address</h1>
           <label className="label mb-2">Flat: <input type="text" name="flat" onChange={handleChange} value={addressData.flat} placeholder="Enter flat" className="input" required ></input></label>
           <label className="label mb-2">Street: <input type="text" name="street" onChange={handleChange} value={addressData.street} placeholder="Enter street" className="input" required ></input></label>
           <label className="label mb-2">Area: <input type="text" name="area" onChange={handleChange} value={addressData.area} placeholder="Enter area" className="input" required ></input></label>
@@ -95,15 +96,16 @@ const AddressForm = ({props}:{props:any}) => {
           <label className="label mb-2">Country: <input type="text" name="country" onChange={handleChange} value={addressData.country} placeholder="Enter country" className="input" required></input></label>
           <label className="label mb-2">Pincode: <input type="text" name="pincode" onChange={handleChange} value={addressData.pincode} placeholder="Enter pincode" className="input" required></input></label>
           <div className="w-full flex justify-center items-center mt-2 mb-2">
-            <button type="submit" className="cursor-pointer w-1/3 h-fit  p-2 bg-green-800 rounded hover:bg-green-500" onClick={() => window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' })}>Submit</button>
+            <button type="submit" className="button_address" onClick={() => window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' })}>Submit</button>
           </div>
           <p>{submitted&&"Address Submitted"}{isLoading&&"Loading..."}</p>  
         </form>
-        <div className="w-1/3 bg-foreground/10 p-3 flex flex-col gap-2 h-fit">
+        </div>
+        <div className="div_address_right orders">
            {userAddress&&userAddress.map((address:UserAddress&{_id:any})=>(
-            <div key={address._id}>
+            <div key={address._id} className="">
             <p>{Object.values(address).slice(0,6).join(',')}</p>
-            <button className="bg-foreground/50 rounded p-2 hover:bg-foreground mb-2" onClick={()=>handleDelete(address._id)}><TrashIcon className="w-5 h-5"/></button>
+            <button className="button_delete" onClick={()=>handleDelete(address._id)}><TrashIcon className="w-5 h-5"/></button>
             <hr/>
             </div>
            ))}

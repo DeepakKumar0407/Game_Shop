@@ -71,7 +71,7 @@ const CheckoutForm = ({prop}:{prop:any}) => {
             <option className="text-black" value={"UPI"}>UPI</option>
             </select>
             <p className="text-sm md:text-xl">Grand Total: {totalPrice}</p>
-            {flag||totalGames.length===0?<button type="submit" disabled className="w-1/3 bg-gray-600 p-3 self-center rounded line-through" >Buy</button>:<button type="submit" className="w-1/3 bg-green-800 hover:bg-green-500 p-3 self-center rounded cursor-pointer">Buy</button>}
+            {flag||totalGames.length===0?<button type="submit" disabled className="button_disabled" >Buy</button>:<button type="submit" className="button_checkout">Buy</button>}
             {flag&&<p className="text-xs">Please select the address</p>}
             <p>{submitted&&"Order Placed"}{isLoading&&"Loading..."}</p>  
         </form>
