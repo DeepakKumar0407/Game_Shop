@@ -17,9 +17,7 @@ export interface UserType{
     password:string;
     address?:UserAddress[];
 }
-export const isValidPassword = ()=>{
-    console.log(true)
-}
+
 const UserSchema = new Schema<UserType>({
     name:{
         type:String,

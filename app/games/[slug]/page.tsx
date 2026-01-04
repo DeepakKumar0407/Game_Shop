@@ -1,3 +1,4 @@
+import CalculateRating from "@/app/components/CalculateRating"
 import CartHelper from "@/app/components/CartHelper"
 import NoLoginPage from "@/app/components/NoLoginPage"
 import ReviewForm from "@/app/components/ReviewForm"
@@ -33,8 +34,8 @@ const GameDetails = async ({params}:{params:Promise<{slug:string}>}) => {
       <div className="ml-5">
       <CartHelper prop={{slug:game.slug,head}}/>
       </div>
-      <div>
-        <h1>Reviews</h1>
+      <div className="mt-5 w-full rounded-xl ml-5">
+        <h1 className="bg-yellow-600 text-black md:text-2xl lg:text-4xl p-5 font-bold">Reviews</h1>
         <ReviewForm slug={slug} orders={order} head={head}/>
       </div>
       </div>
@@ -42,6 +43,10 @@ const GameDetails = async ({params}:{params:Promise<{slug:string}>}) => {
         <p><span className="font-bold text-xl">Release Date:</span> {game.releaseDate}</p>
         <p><span className="font-bold text-xl">Developer:</span>  {game.developer}</p>
         <p><span className="font-bold text-xl">Producer:</span>  {game.producer}</p>
+        <div className="flex justify-baseline gap-2 items-center">
+          <p><span className="font-bold text-xl">Rating:</span></p>
+          <CalculateRating game={game}/>
+          </div>
         <div className="flex justify-baseline gap-2 flex-wrap items-center">
           <p className="font-bold text-xl">Tags:</p>
           {game.tags.map((tag:string,index:number)=>(

@@ -3,6 +3,7 @@ import { unique } from 'next/dist/build/utils';
 
 export interface ReviewType {
     userId:string;
+    userName:string;
     title:string;
     description:string;
     rating:number;
@@ -71,6 +72,10 @@ const GameSchema = new Schema<GameType>({
           userId:{
             type:String,
             required:true,
+          },
+          userName:{
+            type:String,
+            required:true
           },
           title:{
             type:String,

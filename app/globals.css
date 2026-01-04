@@ -125,7 +125,7 @@ body {
 .button_cart{
   @apply p-1 bg-green-800 hover:bg-green-500 rounded cursor-pointer
 }
-.button_diabled{
+.button_disabled{
   @apply w-1/3 bg-gray-600 p-3 self-center rounded line-through
 }
 .button_checkout{
@@ -162,4 +162,15 @@ body {
 }
 .tags,.orders::-webkit-scrollbar-thumb {
   background:gray;
+}
+.review::-webkit-scrollbar {
+  width: 5px;
+  height: 10px;
+  border-radius: 100px;
+}
+.review::-webkit-scrollbar-track {
+}
+.review::-webkit-scrollbar-thumb {
+  background:rgb(144, 93, 0);
+  border-radius: 100px;
 }
