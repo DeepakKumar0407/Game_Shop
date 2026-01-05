@@ -33,7 +33,7 @@ const Cart = async() => {
         </div>
       ))}
       <div className="w-3/4 flex justify-end">
-      <Link href="/checkout" className="bg-green-800 hover:bg-green-500 p-3 pl-5 pr-5 mt-3 rounded-xl text-center">Buy</Link>
+      {games.length>0?<Link href="/checkout" className="bg-green-800 hover:bg-green-500 p-3 pl-5 pr-5 mt-3 rounded-xl text-center">Buy</Link>:<h1 className="text-2xl">No Games Found</h1>}
       </div>
     </div>
   )

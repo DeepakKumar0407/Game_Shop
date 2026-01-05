@@ -30,7 +30,7 @@ const GameDetails = async ({params}:{params:Promise<{slug:string}>}) => {
       <div className="w-2/3">
       <h1 className="font-bold m-5 text-4xl">{game.title}</h1>
       <Image src={game.image} alt="game image" width={1000} height={500} className="ml-5 w-full"/>
-      <p className="m-5 text-justify">{game.description}</p>
+      <p className="m-5 text-justify overflow-auto orders">{game.description}</p>
       <div className="ml-5">
       <CartHelper prop={{slug:game.slug,head}}/>
       </div>
@@ -40,26 +40,26 @@ const GameDetails = async ({params}:{params:Promise<{slug:string}>}) => {
       </div>
       </div>
       <div className="div_game_detail_right">
-        <p><span className="font-bold text-xl">Release Date:</span> {game.releaseDate}</p>
-        <p><span className="font-bold text-xl">Developer:</span>  {game.developer}</p>
-        <p><span className="font-bold text-xl">Producer:</span>  {game.producer}</p>
+        <p><span className="font-bold md:text-xl">Release Date:</span> {game.releaseDate}</p>
+        <p><span className="font-bold md:text-xl">Developer:</span>  {game.developer}</p>
+        <p><span className="font-bold md:text-xl">Producer:</span>  {game.producer}</p>
         <div className="flex justify-baseline gap-2 items-center">
-          <p><span className="font-bold text-xl">Rating:</span></p>
+          <p><span className="font-bold md:text-xl">Rating:</span></p>
           <CalculateRating game={game}/>
           </div>
         <div className="flex justify-baseline gap-2 flex-wrap items-center">
-          <p className="font-bold text-xl">Tags:</p>
+          <p className="font-bold md:text-xl">Tags:</p>
           {game.tags.map((tag:string,index:number)=>(
             <p key={index} className="bg-background/50 p-2 rounded-xl">{tag}</p>
           ))}
         </div>
         <div className="flex justify-baseline gap-2 flex-wrap items-center">
-          <p className="font-bold text-xl">Platforms:</p>
+          <p className="font-bold md:text-xl">Platforms:</p>
           {game.platform.map((plat:string,index:number)=>(
             <p key={index} className="bg-background/50 p-2 rounded-xl">{plat}</p>
           ))}
         </div>
-        <p><span className="font-bold text-xl">Price:</span>  ₹ {game.price}</p>
+        <p><span className="font-bold md:text-xl">Price:</span>  ₹ {game.price}</p>
       </div>
     </div>
   )

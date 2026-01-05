@@ -159,6 +159,7 @@ body {
 }
 .tags,.orders::-webkit-scrollbar {
   width: 5px;
+  height: 4px;
 }
 .tags,.orders::-webkit-scrollbar-thumb {
   background:gray;

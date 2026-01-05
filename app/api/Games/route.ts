@@ -3,6 +3,9 @@ import ConnectDb from "@/lib/mongodb";
 import cloudinary from "@/lib/cloudinary";
 import Game, { GameTypeWithoutDoc } from "@/app/database/game.model";
 import { WithUndefined } from "@/lib/types";
+import { getServerSession } from "next-auth";
+import { authOptions } from "../auth/[...nextauth]/route";
+import User from "@/app/database/user.model";
 
 
 export async function POST(req:NextRequest){

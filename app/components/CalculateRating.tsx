@@ -16,7 +16,6 @@ const CalculateRating = ({game}:{game:GameTypeWithoutDoc}) => {
         
     },[])
     useEffect(()=>{
-        console.log(totalScore,reviews?.length)
          const calculateScore = (totalScore:number)=>{
             const average = totalScore/reviews?.length!
             return average
@@ -33,7 +32,7 @@ const CalculateRating = ({game}:{game:GameTypeWithoutDoc}) => {
     <div className="w-full flex justify-baseline gap-1" title={averageScore.toString()}>
         {Array.from({length:Math.floor(averageScore)}).map((s:any,index:number)=>(
             <div key={index} className="">
-            <FontAwesomeIcon icon={faStar} />
+            <FontAwesomeIcon icon={faStar} className="text-xs md:text-base"/>
             </div>
         ))}
         <div>{averageDecimal>0.25&&averageDecimal<=0.75?<FontAwesomeIcon icon={faStarHalfAlt}/>:averageDecimal>0.75?<FontAwesomeIcon icon={faStar} />:""}</div>

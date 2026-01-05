@@ -5,6 +5,7 @@ import { OrderType } from "../database/order.model"
 import { StarIcon } from "@heroicons/react/24/outline"
 import { StarIcon as StarIconSolid } from "@heroicons/react/24/solid"
 import { UserType } from "../database/user.model"
+import UpdateReviewForm from "./UpdateReviewForm"
 
 const ReviewForm = ({slug,orders,head}:{orders:OrderType[],head:any,slug:string}) => {
     const initialData:Omit<ReviewType,"userId">={
@@ -16,14 +17,15 @@ const ReviewForm = ({slug,orders,head}:{orders:OrderType[],head:any,slug:string}
     const [reviewData, setReviewData] = useState(initialData)
     const [flag,setFlag] = useState("none")
     const [game,setGame] = useState<GameTypeWithoutDoc>()
-    const [user,setUser] = useState<UserType>()
-    const [rating,setRating] = useState(1)
+    const [user,setUser] = useState<UserType &{_id:string}>()
+    const [updated,setUpdated] = useState(false)
     const ratingArray = [1,2,3,4,5]
      useEffect(()=>{
         const fetchGame = async ()=>{
             const res = await fetch(`http://localhost:3000/api/Games/${slug}`)
             const {game} = await res.json()
             setGame(game) 
+            setReviewData(initialData)
         }
          const fetchUser = async ()=>{
             const res = await fetch(`http://localhost:3000/api/user`,{
@@ -39,7 +41,7 @@ const ReviewForm = ({slug,orders,head}:{orders:OrderType[],head:any,slug:string}
         }
         fetchGame()
         fetchUser()
-    },[flag])
+    },[flag,updated])
     useEffect(()=>{
         const compareGame = ()=>{
             orders.map((order:OrderType)=>{
@@ -59,7 +61,7 @@ const ReviewForm = ({slug,orders,head}:{orders:OrderType[],head:any,slug:string}
         }
         compareGame()
         compareReview()
-    },[game])
+    },[game,updated])
    
     const handleChange = (e:React.ChangeEvent<HTMLInputElement|HTMLTextAreaElement>)=>{
         const {name,value} = e.target
@@ -69,10 +71,9 @@ const ReviewForm = ({slug,orders,head}:{orders:OrderType[],head:any,slug:string}
         }))
     }
     const handleOver = (index:number)=>{
-        setRating(index+1)
         setReviewData((state)=>({
             ...state,
-            rating:rating
+            rating:index
         }))
     }
     const handleSubmit = async (e:React.FormEvent<HTMLFormElement>)=>{
@@ -84,10 +85,8 @@ const ReviewForm = ({slug,orders,head}:{orders:OrderType[],head:any,slug:string}
         })
         if(res.ok){
             setFlag("posted")
-            console.log("changed",flag)
         }
     }
-  
     if(flag==="owned"){
   return (
     <div className="w-full mt-5 text-black rounded-xl">
@@ -98,8 +97,8 @@ const ReviewForm = ({slug,orders,head}:{orders:OrderType[],head:any,slug:string}
             <label className=""><span className="font-bold">Rating</span></label>
             <div className="flex justify-baseline gap-2">
             {ratingArray.map((r:number,index:number)=>(
-                <button className="cursor-pointer" type="button"onMouseOver={()=>handleOver(index)} key={index}>
-                {rating<index+1?<StarIcon className="w-7 h-7 text-black"/>:<StarIconSolid className="w-7 h-7 text-black"/>}
+                <button className="cursor-pointer" type="button" onClick={()=>handleOver(r)} key={index}>
+                {reviewData.rating<index+1?<StarIcon className="w-4 h-4 md:w-7 md:h-7 text-black"/>:<StarIconSolid className="w-4 h-4 md:w-7 md:h-7 text-black"/>}
                 </button>
             ))}
             </div>
@@ -130,7 +129,8 @@ const ReviewForm = ({slug,orders,head}:{orders:OrderType[],head:any,slug:string}
   )
 }else if(flag==="posted"){
     return(
-        <div>Update
+        <div>
+        <UpdateReviewForm game={game} user={user} head={head} updated={updated} setUpdated={setUpdated} deleted={flag} setDeleted={setFlag}/>
         <div className="flex flex-col justify-baseline gap-4 w-full p-5 ml-5 text-black">
           {game?.reviews?.map((review:ReviewType,index:number)=>(
             <div key={index} className="flex justify-baseline gap-2 bg-yellow-400 p-5 rounded-xl">
@@ -142,7 +142,7 @@ const ReviewForm = ({slug,orders,head}:{orders:OrderType[],head:any,slug:string}
                <p className="bg-amber-500 w-full p-5 rounded-xl max-h-50 overflow-auto review"> {review.description}</p>
                <div className="bg-amber-500 w-fit p-5 rounded-xl flex justify-baseline gap-2">{Array.from({length:review.rating}).map((r:any,index:number)=>(
                 <div key={index} className="">
-                <StarIconSolid className="w-7 h-7"/>
+                <StarIconSolid className="w-4 h-4 md:w-7 md:h-7"/>
                 </div>
                ))}</div>
                </div>
@@ -166,7 +166,7 @@ else{
                <p className="bg-amber-500 w-full p-5 rounded-xl overflow-auto review max-h-50"> {review.description}</p>
                <div className="bg-amber-500 w-fit p-5 rounded-xl flex justify-baseline gap-2">{Array.from({length:review.rating}).map((r:any,index:number)=>(
                 <div key={index} className="">
-                <StarIconSolid className="w-7 h-7"/>
+                <StarIconSolid className="w-4 h-4 md:w-7 md:h-7"/>
                 </div>
                ))}</div>
                </div>
