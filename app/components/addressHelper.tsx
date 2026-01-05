@@ -2,9 +2,7 @@
 import Link from "next/link"
 import { useEffect, useState } from "react"
 import { UserType } from "../database/user.model"
-import { useSession } from "next-auth/react"
 const AddressHelper =() => {
-  const {data:session} = useSession()
   const [user,setUser] = useState<UserType>() 
   useEffect(()=>{
     const getUser = async ()=>{
@@ -14,19 +12,13 @@ const AddressHelper =() => {
     }
     getUser()
   },[])
-  if (!session) {
-    return(
-    <div className="w-2/10 ">
-    </div>
-   )
-  } else {
+  console.log(user?.address?.length)
     return (
     <Link href='/address' className="w-2/10 flex items-center">
     <div className="w-full">
-      {user && <p className="p_address_helper">{user?.address?.[0]?.flat+","}{user?.address?.[0]?.street+","}{user?.address?.[0]?.city}</p>}
+      {user?.address?.length?(<p className="p_address_helper">{user?.address?.[0]?.flat+","}{user?.address?.[0]?.street+","}{user?.address?.[0]?.city}</p>):(<p className="font-bold text-white">Edit Address</p>)}
     </div>
     </Link>
   )
   }
-}
 export default AddressHelper

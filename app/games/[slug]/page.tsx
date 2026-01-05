@@ -1,12 +1,9 @@
 import CalculateRating from "@/app/components/CalculateRating"
 import CartHelper from "@/app/components/CartHelper"
-import NoLoginPage from "@/app/components/NoLoginPage"
 import ReviewForm from "@/app/components/ReviewForm"
-import { ReviewType } from "@/app/database/game.model"
-import { getServerSession } from "next-auth"
 import { headers } from "next/headers"
 import Image from "next/image"
-import Link from "next/link"
+
 
 const GameDetails = async ({params}:{params:Promise<{slug:string}>}) => {
   
@@ -19,12 +16,6 @@ const GameDetails = async ({params}:{params:Promise<{slug:string}>}) => {
     headers:Object.fromEntries(head.entries())
   })
   const {order} = await orderRes.json()
-  const session = await getServerSession()
-  if (!session) {
-   return(
-    <NoLoginPage/>
-   )
-  } else {
     return (
     <div className="div_game_detail">
       <div className="w-2/3">
@@ -64,6 +55,4 @@ const GameDetails = async ({params}:{params:Promise<{slug:string}>}) => {
     </div>
   )
   }
-  
-}
 export default GameDetails

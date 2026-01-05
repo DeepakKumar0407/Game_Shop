@@ -1,12 +1,9 @@
 "use client"
 import { useEffect, useState } from "react"
 import { UserAddress, UserType } from "../database/user.model"
-import { useSession } from "next-auth/react"
-import Link from "next/link"
 import { TrashIcon } from "@heroicons/react/24/outline"
 
 const AddressForm = ({props}:{props:any}) => {
-    const {data:session} = useSession()
     const head = props
     const [user,setUser] = useState<UserType&{_id:any}>()
     const userAddress:any = user?.address
@@ -51,6 +48,9 @@ const AddressForm = ({props}:{props:any}) => {
             method:"PUT",
             body:JSON.stringify(addressData)
           })
+          if(res.ok){
+           window.location.reload()
+          }
         } catch (error) {
           console.error(error)
         }
@@ -74,15 +74,9 @@ const AddressForm = ({props}:{props:any}) => {
         flag === false?setFlag(true):setFlag(false)
         setSubmitted(false)
         setIsLoading(false)
+        window.location.reload()
       }
-  if (!session) {
-   return(
-    <div className="div">
-    <p>You must be logged in to see this page</p>
-    <Link href="/login">Login</Link>
-    </div>
-   )
-  } else {
+
   return (
       <div className="div_address">
       <div className="div_address_left">
@@ -112,6 +106,5 @@ const AddressForm = ({props}:{props:any}) => {
         </div>
     </div>
   )
-}
 }
 export default AddressForm

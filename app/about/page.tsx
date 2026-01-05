@@ -1,15 +1,4 @@
-import { getServerSession } from "next-auth"
-import Link from "next/link"
-import NoLoginPage from "../components/NoLoginPage"
-
-
 const About = async() => {
-  const session = await getServerSession()
-  if (!session) {
-   return(
-   <NoLoginPage/>
-   )
-  } else {
      return (
     <div className="mt-3 pb-15 font-robo text-white">
         <h1 className="text-center mb-5 text-4xl font-bold">About us</h1>
@@ -43,6 +32,4 @@ const About = async() => {
     </div>
   )
   }
- 
-}
 export default About

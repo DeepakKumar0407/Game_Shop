@@ -15,7 +15,7 @@ const OrderCard = ({prop}:{prop:any}) => {
                 <p><span className="font-bold">Total Cost:</span> {order.totalPay}</p>
                 </div>
                 <div className="w-4/10">               
-                <p><span className="font-bold">Ordered On:</span> {Date().split(" ").slice(0,4).join(" ")}</p>
+                <p><span className="font-bold">Ordered On:</span> {Date().split(" ").slice(1,4).join(" ")}</p>
                 </div>
                 </Link>
                 </div>

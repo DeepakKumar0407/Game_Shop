@@ -1,6 +1,5 @@
 "use client"
 import Image from "next/image";
-import { GameTypeWithoutDoc } from "../database/game.model";
 import Link from "next/link";
 import { useState } from "react";
 import CartHelper from "./CartHelper";
@@ -28,7 +27,7 @@ const GameCard = ({prop}:{prop:any}) => {
           <p className="ml-2">{game.developer}</p>
           <p className="mr-2">{game.releaseDate}</p>
           </div>
-          <div className="flex justify-baseline gap-2 ml-2 w-full overflow-clip">
+          <div className="flex justify-baseline gap-2 ml-2 w-full overflow-hidden">
           {game.tags.map((tag:string,index:number)=>(
             <p key={index} className="bg-background/50 p-2 rounded-xl">{tag}</p>
           ))}

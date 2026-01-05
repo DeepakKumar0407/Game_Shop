@@ -1,12 +1,8 @@
-import Link from "next/link"
-import { getServerSession } from "next-auth"
 import { GameType } from "../database/game.model"
-import Image from "next/image"
 import CheckoutForm from "../components/CheckoutForm"
 import { headers } from "next/headers"
 import GameCardLong from "../components/GameCardLong"
 import { CartType } from "../database/cart.model"
-import NoLoginPage from "../components/NoLoginPage"
 
 const Checkout = async() => {
   const flag = true
@@ -21,16 +17,9 @@ const Checkout = async() => {
       headers:Object.fromEntries(head.entries())
   })
     const {user}= await userRes.json()
-  const session = await getServerSession()
   let totalPrice:number = games.reduce((sum:number,game:GameType & {count:number})=>{
     return sum + (Number(game.price)*game.count)
   },0)
-
-  if (!session) {
-   return(
-   <NoLoginPage/>
-   )
-  } else {
      return (
     <div className="font-robo text-white flex justify-baseline w-9/10 mx-auto mb-15 gap-2">
       <div className="flex justify-baseline flex-col gap-4 mt-5 w-2/3">
@@ -46,6 +35,4 @@ const Checkout = async() => {
     </div>
   )
   }
- 
-}
 export default Checkout

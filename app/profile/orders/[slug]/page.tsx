@@ -1,16 +1,10 @@
-import { getServerSession } from "next-auth"
-import Link from "next/link"
 import LogoutButton from "@/app/components/LogoutButton" 
 import { headers } from "next/headers"
-import OrderCard from "@/app/components/OrderCard" 
 import { OrderGameType, OrderType } from "@/app/database/order.model"
-import GameCardLong from "@/app/components/GameCardLong"
-import NoLoginPage from "@/app/components/NoLoginPage"
 
 const OrderDetails = async ({params}:{params:Promise<{slug:string}>}) => {
 const {slug} = await params
 const head = await headers()
-const session = await getServerSession()
 const res = await fetch("http://localhost:3000/api/user",{
   method:"GET",
   headers:Object.fromEntries(head.entries())
@@ -23,17 +17,12 @@ const formatDate=(dateString:string)=>{
   let date = dateDate.toString().split(" ").slice(0,4).join(" ")
   return date
 }
- if (!session) {
-   return(
-   <NoLoginPage/>
-   )
-  } else {
     return(
       <div className="div_profile">
         <div className="div_profile_left">
-          <p>Name: {user.name}</p>
-          <p>Email: {user.email}</p>
-          <p>Phone: {user.phone}</p>
+          <p className="orders overflow-auto"><span className="font-bold md:text-base">Name:</span> {user.name}</p>
+          <p className="orders overflow-auto"><span className="font-bold md:text-base">Email:</span> {user.email}</p>
+          <p className="orders overflow-auto"><span className="font-bold md:text-base">Phone:</span> {user.phone}</p>
           <LogoutButton/>
         </div>
         <div className="w-2/3 flex flex-col justify-baseline gap-2 bg-foreground/50 rounded h-110 overflow-auto orders md:text-xl"> 
@@ -54,5 +43,4 @@ const formatDate=(dateString:string)=>{
       </div>
     )
   }
-}
 export default OrderDetails

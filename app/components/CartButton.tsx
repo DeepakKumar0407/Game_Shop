@@ -1,10 +1,8 @@
 'use client'
-
 import { useState } from "react"
 import { GameType } from "../database/game.model"
 import { ReadonlyHeaders } from "next/dist/server/web/spec-extension/adapters/headers"
-import { PlusIcon } from "@heroicons/react/24/solid"
-import { MinusIcon } from "@heroicons/react/24/solid"
+
 
 const CartButton = ({game,head}:{game:GameType & {count:number},head:ReadonlyHeaders}) => {
     const [count,setCount] = useState(game.count)

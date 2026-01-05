@@ -1,7 +1,5 @@
 "use client"
-
 import { redirect } from "next/navigation"
-
 const CartHelper = ({prop}:{prop:any}) => {
     const {slug,head} = prop
     const handleCart=async()=>{
