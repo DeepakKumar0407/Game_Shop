@@ -3,6 +3,7 @@ import CartHelper from "@/app/components/CartHelper"
 import ReviewForm from "@/app/components/ReviewForm"
 import { headers } from "next/headers"
 import Image from "next/image"
+import parse from "html-react-parser";
 
 
 const GameDetails = async ({params}:{params:Promise<{slug:string}>}) => {
@@ -21,7 +22,7 @@ const GameDetails = async ({params}:{params:Promise<{slug:string}>}) => {
       <div className="w-2/3">
       <h1 className="font-bold m-5 text-4xl">{game.title}</h1>
       <Image src={game.image} alt="game image" width={1000} height={500} className="ml-5 w-full"/>
-      <p className="m-5 text-justify overflow-auto orders">{game.description}</p>
+      <div className="m-5 text-justify overflow-auto orders text-white">{parse(game.description)}</div>
       <div className="ml-5">
       <CartHelper prop={{slug:game.slug,head}}/>
       </div>

@@ -1,6 +1,6 @@
 "use client"
 import { useState } from "react";
-
+import Editor from 'react-simple-wysiwyg';
 const Create = () => {
   const[isLoading,setIsLoading] = useState(false)
   const[submitted,setSubmitted] = useState(false)
@@ -67,7 +67,8 @@ const Create = () => {
           <label className="label">Platform: <input type="text" name="platform" onChange={handleChange} value={gameData.platform} placeholder="Enter,platform,example" className="input" required maxLength={100}></input></label>
           <label className="label">Image: <input type="file" name="image" onChange={(e)=>{setGameData(gameData=>({...gameData,image:e.target.files?.[0]||null}))}} className="input" required></input></label>
           <label className="label">Release Date: <input type="date" name="releaseDate" onChange={handleChange} value={gameData.releaseDate} className="block text-[#807F80]" required></input></label>
-          <label className="label_description">Description<textarea name="description" onChange={handleChange} value={gameData.description} placeholder="    Write game details" className="input_description" rows={10} required maxLength={5000}></textarea></label>
+          <label className="label_description text-center mb-5">Description</label>
+           <Editor value={gameData.description} onChange={(e)=>setGameData(state=>({...state,description:e.target.value}))} className="text-white" />
           <div className="w-full flex justify-center mt-3 mb-3">
             <button type="submit" className="button_submit" onClick={() => window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' })}>Submit</button>
           </div>

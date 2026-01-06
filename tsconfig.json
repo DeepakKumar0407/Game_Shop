@@ -29,6 +29,6 @@
     ".next/types/**/*.ts",
     ".next/dev/types/**/*.ts",
     "**/*.mts"
-, "app/middleware.js"  ],
+, "app/middleware.js", "quillSetup.js", "app/components/testing.js"  ],
   "exclude": ["node_modules"]
 }
